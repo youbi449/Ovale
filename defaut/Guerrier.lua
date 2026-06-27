@@ -1,0 +1,207 @@
+Ovale.defaut["WARRIOR"] =
+[[
+Define(THUNDERCLAP 6343)
+Define(SHOCKWAVE 46968)
+Define(DEMOSHOUT 1160)
+Define(COMMANDSHOUT 469)
+Define(BATTLESHOUT 2048)
+Define(REVENGE 6572)
+Define(SHIELDSLAM 23922)
+Define(DEVASTATE 20243)
+Define(VICTORY 34428)
+Define(EXECUTE 5308)
+Define(BLOODTHIRST 23881)
+Define(WHIRLWIND 1680)
+Define(SLAMBUFF 46916)
+Define(SLAM 1464)
+Define(MORTALSTRIKE 12294)
+Define(SWEEPINGSTRIKES 12328)
+Define(SLAMTALENT 2233)
+Define(CLEAVE 845)
+Define(HEROICSTRIKE 78)
+Define(SUNDER 7386)
+Define(CONCUSSIONBLOW 12809)
+Define(REND 772)
+Define(OVERPOWER 7384)
+Define(SHIELDBLOCK 2565)
+Define(SHIELDWALL 871)
+Define(LASTSTAND 12975)
+Define(DEATHWISH 12292)
+Define(RECKLESSNESS 1719)
+Define(BLADESTORM 46924)
+Define(SUDDENDEATH 52437)
+Define(RETALIATION 20230)
+Define(TASTEFORBLOOD 56636)
+
+Define(DEMORALIZINGROAR 48560)
+Define(CURSEOFWEAKNESS 50511)
+
+AddCheckBox(multi L(AOE))
+AddCheckBox(demo SpellName(DEMOSHOUT))
+AddCheckBox(whirlwind SpellName(WHIRLWIND) checked)
+AddCheckBox(sunder SpellName(SUNDER))
+AddListItem(shout none L(None))
+AddListItem(shout battle SpellName(BATTLESHOUT) default)
+AddListItem(shout command SpellName(COMMANDSHOUT))
+
+SpellAddTargetDebuff(THUNDERCLAP THUNDERCLAP=30)
+SpellAddTargetDebuff(DEMOSHOUT DEMOSHOUT=45)
+SpellAddTargetDebuff(REND REND=15)
+SpellAddTargetDebuff(DEVASTATE SUNDER=30)
+SpellAddTargetDebuff(SUNDER SUNDER=30)
+SpellAddBuff(BATTLESHOUT BATTLESHOUT=120)
+SpellAddBuff(COMMANDSHOUT COMMANDSHOUT=120)
+SpellAddBuff(SLAM SLAMBUFF=-1)
+SpellInfo(WHIRLWIND cd=8)
+SpellInfo(BLOODTHIRST cd=4)
+SpellInfo(MORTALSTRIKE cd=6)
+SpellInfo(SWEEPINGSTRIKES cd=30)
+SpellInfo(DEATHWISH cd=180)
+SpellInfo(HEROICSTRIKE toggle=1)
+SpellInfo(CLEAVE toggle=1)
+ScoreSpells(WHIRLWIND BLOODTHIRST SLAM REND MORTALSTRIKE EXECUTE SHIELDSLAM REVENGE)
+
+AddIcon help=main
+{
+	if List(shout command) and SpellKnown(COMMANDSHOUT) and BuffExpires(COMMANDSHOUT 3)
+		Spell(COMMANDSHOUT nored=1)
+
+	if List(shout battle) and SpellKnown(BATTLESHOUT) and BuffExpires(BATTLESHOUT 3)
+		Spell(BATTLESHOUT nored=1)
+
+	if Stance(2) # Defensive
+	{
+		if SpellKnown(DEMOSHOUT)
+			and CheckBoxOn(demo)
+			and { TargetClassification(elite) or TargetClassification(worldboss) }
+			and TargetDebuffExpires(DEMOSHOUT 2)
+			and TargetDebuffExpires(DEMORALIZINGROAR 0)
+			and TargetDebuffExpires(CURSEOFWEAKNESS 0)
+			Spell(DEMOSHOUT nored=1)
+		if HasShield() and BuffPresent(SHIELDBLOCK) and SpellKnown(SHIELDSLAM) Spell(SHIELDSLAM)
+		if SpellKnown(REVENGE) Spell(REVENGE usable=1)
+		if HasShield() and SpellKnown(SHIELDSLAM) Spell(SHIELDSLAM)
+		if SpellKnown(SHOCKWAVE) Spell(SHOCKWAVE)
+		if SpellKnown(CONCUSSIONBLOW) Spell(CONCUSSIONBLOW)
+		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
+		if SpellKnown(DEVASTATE) Spell(DEVASTATE)
+		if CheckBoxOn(sunder) and SpellKnown(SUNDER) and Mana(more 20) Spell(SUNDER priority=2)
+	}
+
+	if Stance(3) # Berserker
+	{
+		if HasShield() and SpellKnown(SHIELDSLAM) Spell(SHIELDSLAM)
+		if SpellKnown(SHOCKWAVE) Spell(SHOCKWAVE)
+		if SpellKnown(CONCUSSIONBLOW) Spell(CONCUSSIONBLOW)
+
+		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
+		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if SpellKnown(EXECUTE) and TargetLifePercent(less 20) Spell(EXECUTE usable=1)
+		if SpellKnown(VICTORY) Spell(VICTORY usable=1)
+
+		if SpellKnown(SLAM) and BuffPresent(SLAMBUFF)
+		{
+			if BuffExpires(SLAMBUFF 2.5)
+				Spell(SLAM nored=1)
+			if BuffDuration(SLAMBUFF more 6) and 1s before Spell(BLOODTHIRST) and { 1s before Spell(WHIRLWIND) or CheckBoxOff(whirlwind) }
+				Spell(SLAM nored=1)
+			Spell(SLAM priority=2 nored=1)
+		}
+
+		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
+		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
+	}
+
+	if Stance(1) # Battle
+	{
+		if SpellKnown(OVERPOWER) and BuffExpires(TASTEFORBLOOD 1.5) and TargetDebuffExpires(REND 0 mine=1)
+			Spell(OVERPOWER usable=1)
+		if SpellKnown(REND) and TargetDebuffExpires(REND 0 mine=1) and TargetDeadIn(more 8)
+			Spell(REND)
+		if SpellKnown(OVERPOWER)
+		{
+			unless BuffPresent(TASTEFORBLOOD)
+				Spell(OVERPOWER usable=1)
+		}
+		if SpellKnown(OVERPOWER) and BuffExpires(TASTEFORBLOOD 4.5)
+			Spell(OVERPOWER usable=1)
+
+		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
+		if SpellKnown(EXECUTE) and { BuffPresent(SUDDENDEATH) or TargetLifePercent(less 20) } Spell(EXECUTE usable=1)
+		if SpellKnown(MORTALSTRIKE) and TargetLifePercent(more 20) Spell(MORTALSTRIKE)
+		if SpellKnown(OVERPOWER) Spell(OVERPOWER usable=1)
+		if SpellKnown(VICTORY) Spell(VICTORY usable=1)
+
+		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
+		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if HasShield() and SpellKnown(SHIELDSLAM) Spell(SHIELDSLAM)
+		if SpellKnown(SHOCKWAVE) Spell(SHOCKWAVE)
+		if SpellKnown(CONCUSSIONBLOW) Spell(CONCUSSIONBLOW)
+	}
+
+}
+
+AddIcon help=aoe
+{
+	if Stance(2) # Defensive
+	{
+		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
+		if SpellKnown(SHOCKWAVE) Spell(SHOCKWAVE)
+		if SpellKnown(REVENGE) Spell(REVENGE usable=1)
+		if HasShield() and SpellKnown(SHIELDSLAM) Spell(SHIELDSLAM)
+		if SpellKnown(DEVASTATE) Spell(DEVASTATE)
+	}
+	if Stance(3) # Berserker
+	{
+		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
+		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
+		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if SpellKnown(CLEAVE) Spell(CLEAVE)
+		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
+	}
+	if Stance(1) # Battle
+	{
+		if SpellKnown(REND) and TargetDebuffExpires(REND 0 mine=1) and TargetDeadIn(more 8) Spell(REND)
+		if SpellKnown(SWEEPINGSTRIKES) Spell(SWEEPINGSTRIKES)
+		if SpellKnown(OVERPOWER) Spell(OVERPOWER usable=1)
+		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
+		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
+		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
+		if SpellKnown(CLEAVE) Spell(CLEAVE)
+	}
+}
+
+AddIcon help=offgcd
+{
+	if CheckBoxOff(multi)
+	{
+		if SpellKnown(HEROICSTRIKE) and Mana(more 60)
+			Spell(HEROICSTRIKE)
+	}
+	if CheckBoxOn(multi)
+	{
+		if SpellKnown(CLEAVE) and Mana(more 45)
+			Spell(CLEAVE)
+		if SpellKnown(HEROICSTRIKE) and Mana(more 75)
+			Spell(HEROICSTRIKE)
+	}
+}
+
+AddIcon help=cd
+{
+	if Stance(3) # Berserker
+	{
+		if SpellKnown(DEATHWISH) Spell(DEATHWISH)
+		if SpellKnown(RECKLESSNESS) Spell(RECKLESSNESS)
+	}
+	if Stance(1) # Battle
+	{
+		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
+		if SpellKnown(RETALIATION) Spell(RETALIATION)
+	}
+	Item(Trinket0Slot usable=1)
+	Item(Trinket1Slot usable=1)
+}
+
+]]

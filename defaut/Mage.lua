@@ -1,0 +1,109 @@
+Ovale.defaut["MAGE"]=
+[[
+Define(TALENTLIVINGBOMB 1852)
+Define(TALENTPIERCINGICE 61)
+Define(TALENTCHILLEDTOTHEBONES 1856)
+Define(TALENTARCANEBARRAGE 1847)
+Define(TALENTIMPROVEDSCORSH 25)
+
+Define(HOTSTREAK 48108)
+Define(IMPROVEDSCORCH 22959)
+Define(PYROBLAST 11366)
+Define(LIVINGBOMB 44457)
+Define(SCORCH 2948)
+Define(FROSTFIREBOLT 44614)
+Define(FIREBALL 133)
+Define(FIREBLAST 2136)
+Define(FROSTBOLT 116)
+Define(ICELANCE 30455)
+Define(DEEPFREEZE 44572)
+Define(BRAINFREEZE 57761)
+Define(FINGERFROST 44544)
+Define(ARCANEBARRAGE 44425)
+Define(ARCANEMISSILES 5143)
+Define(ARCANEBLAST 30451)
+Define(ARCANEPOWER 12042)
+Define(MISSILEBARRAGE 44401)
+Define(COMBUSTION 11129)
+Define(ICYVEINS 12472)
+Define(MIRRORIMAGE 55342)
+Define(SUMMONWATERELEMENTAL 31687)
+Define(PRESENCEOFMIND 12043)
+Define(MAGEARMOR 6117)
+Define(MOLTENARMOR 30482)
+Define(ICEARMOR 7302)
+Define(ARCANEEXPLOSION 1449)
+Define(BLIZZARD 10)
+Define(FLAMESTRIKE 2120)
+
+AddCheckBox(scorchdebuff SpellName(SCORCH) talent=TALENTIMPROVEDSCORSH)
+AddCheckBox(abarr SpellName(ARCANEBARRAGE) checked talent=TALENTARCANEBARRAGE)
+
+SpellAddTargetDebuff(LIVINGBOMB LIVINGBOMB=12)
+SpellAddTargetDebuff(IMPROVEDSCORCH IMPROVEDSCORCH=30)
+SpellAddBuff(ARCANEBLAST ARCANEBLAST=6)
+SpellInfo(ARCANEBARRAGE cd=3)
+SpellInfo(LIVINGBOMB cd=1.5)
+SpellInfo(DEEPFREEZE cd=30)
+
+AddIcon help=main
+{
+	unless InCombat()
+	{
+		if SpellKnown(MOLTENARMOR) and BuffExpires(MOLTENARMOR 400) Spell(MOLTENARMOR)
+		if SpellKnown(MAGEARMOR) and BuffExpires(MAGEARMOR 400) Spell(MAGEARMOR)
+		if SpellKnown(ICEARMOR) and BuffExpires(ICEARMOR 400) Spell(ICEARMOR)
+	}
+
+	if SpellKnown(LIVINGBOMB)
+	{
+		if CheckBoxOn(scorchdebuff) and SpellKnown(SCORCH) and TargetDebuffExpires(IMPROVEDSCORCH 6) and TargetDeadIn(more 15) Spell(SCORCH)
+		if BuffPresent(HOTSTREAK) and SpellKnown(PYROBLAST) Spell(PYROBLAST)
+		if TargetDebuffExpires(LIVINGBOMB 0 mine=1) and TargetDeadIn(more 12) Spell(LIVINGBOMB)
+		if SpellKnown(FROSTFIREBOLT) and TalentPoints(TALENTPIERCINGICE more 0) Spell(FROSTFIREBOLT)
+		if SpellKnown(FIREBALL) Spell(FIREBALL)
+	}
+
+	if SpellKnown(DEEPFREEZE) or TalentPoints(TALENTCHILLEDTOTHEBONES more 0)
+	{
+		if SpellKnown(DEEPFREEZE) and BuffPresent(FINGERFROST) Spell(DEEPFREEZE)
+		if SpellKnown(FROSTFIREBOLT) and BuffPresent(BRAINFREEZE) Spell(FROSTFIREBOLT)
+		if SpellKnown(ICELANCE) and BuffPresent(FINGERFROST) Spell(ICELANCE)
+		if SpellKnown(FROSTBOLT) Spell(FROSTBOLT)
+	}
+
+	if SpellKnown(ARCANEBARRAGE) or TalentPoints(TALENTARCANEBARRAGE more 0)
+	{
+		if BuffPresent(MISSILEBARRAGE) and BuffPresent(ARCANEBLAST stacks=4) and SpellKnown(ARCANEMISSILES) Spell(ARCANEMISSILES)
+		if SpellKnown(ARCANEBLAST) Spell(ARCANEBLAST)
+		if BuffPresent(MISSILEBARRAGE) and SpellKnown(ARCANEMISSILES) Spell(ARCANEMISSILES)
+		if CheckBoxOn(abarr) and SpellKnown(ARCANEBARRAGE) Spell(ARCANEBARRAGE)
+		if SpellKnown(ARCANEMISSILES) Spell(ARCANEMISSILES)
+	}
+
+	if SpellKnown(FROSTBOLT) Spell(FROSTBOLT)
+	if SpellKnown(FIREBALL) Spell(FIREBALL)
+	if SpellKnown(FIREBLAST) Spell(FIREBLAST priority=2)
+}
+
+AddIcon help=aoe
+{
+	if SpellKnown(LIVINGBOMB) and TargetDebuffExpires(LIVINGBOMB 0 mine=1) and TargetDeadIn(more 12) Spell(LIVINGBOMB)
+	if SpellKnown(FLAMESTRIKE) Spell(FLAMESTRIKE)
+	if SpellKnown(BLIZZARD) Spell(BLIZZARD)
+	if SpellKnown(ARCANEEXPLOSION) Spell(ARCANEEXPLOSION)
+	if SpellKnown(ARCANEBLAST) Spell(ARCANEBLAST)
+	if SpellKnown(FROSTBOLT) Spell(FROSTBOLT)
+	if SpellKnown(FIREBALL) Spell(FIREBALL)
+}
+
+AddIcon help=cd
+{
+	if SpellKnown(MIRRORIMAGE) Spell(MIRRORIMAGE)
+	if SpellKnown(ARCANEPOWER) and BuffPresent(ARCANEBLAST stacks=3) Spell(ARCANEPOWER)
+	if SpellKnown(COMBUSTION) Spell(COMBUSTION)
+	if SpellKnown(ICYVEINS) Spell(ICYVEINS)
+	if SpellKnown(PRESENCEOFMIND) Spell(PRESENCEOFMIND)
+	if SpellKnown(SUMMONWATERELEMENTAL) and PetPresent(no) Spell(SUMMONWATERELEMENTAL)
+}
+]]
