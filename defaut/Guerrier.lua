@@ -5,6 +5,7 @@ Define(SHOCKWAVE 46968)
 Define(DEMOSHOUT 1160)
 Define(COMMANDSHOUT 469)
 Define(BATTLESHOUT 2048)
+Define(BLOODRAGE 2687)
 Define(REVENGE 6572)
 Define(SHIELDSLAM 23922)
 Define(DEVASTATE 20243)
@@ -40,6 +41,7 @@ AddCheckBox(multi L(AOE))
 AddCheckBox(demo SpellName(DEMOSHOUT))
 AddCheckBox(whirlwind SpellName(WHIRLWIND) checked)
 AddCheckBox(sunder SpellName(SUNDER))
+AddCheckBox(bloodrage SpellName(BLOODRAGE) checked)
 AddListItem(shout none L(None))
 AddListItem(shout battle SpellName(BATTLESHOUT) default)
 AddListItem(shout command SpellName(COMMANDSHOUT))
@@ -57,6 +59,7 @@ SpellInfo(BLOODTHIRST cd=4)
 SpellInfo(MORTALSTRIKE cd=6)
 SpellInfo(SWEEPINGSTRIKES cd=30)
 SpellInfo(DEATHWISH cd=180)
+SpellInfo(BLOODRAGE cd=60)
 SpellInfo(HEROICSTRIKE toggle=1)
 SpellInfo(CLEAVE toggle=1)
 ScoreSpells(WHIRLWIND BLOODTHIRST SLAM REND MORTALSTRIKE EXECUTE SHIELDSLAM REVENGE)
@@ -174,6 +177,9 @@ AddIcon help=aoe
 
 AddIcon help=offgcd
 {
+	if CheckBoxOn(bloodrage) and SpellKnown(BLOODRAGE) and InCombat() and Mana(less 20)
+		Spell(BLOODRAGE)
+
 	if CheckBoxOff(multi)
 	{
 		if SpellKnown(HEROICSTRIKE) and Mana(more 60)
