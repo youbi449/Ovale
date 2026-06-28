@@ -70,9 +70,9 @@ AddIcon help=main
 	if SpellKnown(DIVINESTORM) or SpellKnown(CRUSADERSTRIKE)
 	{
 		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
-		if SpellKnown(CRUSADERSTRIKE) Spell(CRUSADERSTRIKE)
 		if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
 		if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
+		if SpellKnown(CRUSADERSTRIKE) Spell(CRUSADERSTRIKE)
 		if CheckBoxOn(reckoning) and SpellKnown(HANDOFRECKONING) Spell(HANDOFRECKONING usable=1)
 		if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
 		if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
@@ -84,7 +84,7 @@ AddIcon help=main
 	if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
 	if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
 	if SpellKnown(HOLYSHOCK) Spell(HOLYSHOCK)
-	if SpellKnown(EXORCISM) Spell(EXORCISM)
+	if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
 	if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
 }
 
@@ -99,7 +99,7 @@ AddIcon help=aoe
 	if SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
 	if HasShield() and SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
 	if HasShield() and SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
-	if SpellKnown(EXORCISM) Spell(EXORCISM)
+	if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
 }
 
 AddIcon help=cd
