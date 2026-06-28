@@ -63,7 +63,7 @@ AddIcon help=main
 		if SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
 		if SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
 		if SpellKnown(AVENGERSSHIELD) Spell(AVENGERSSHIELD)
-		if SpellKnown(EXORCISM) Spell(EXORCISM)
+		if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
 		if CheckBoxOn(coleredivine) and SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
 	}
 

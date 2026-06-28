@@ -144,6 +144,13 @@ foreach ($check in $coverageChecks) {
 Assert-Order "Ret Judgement before Crusader Strike" "defaut/Paladin.lua" "List\(jugement lumiere\).*JUDGELIGHT" "Spell\(CRUSADERSTRIKE\)" 70 70
 Assert-Order "Ret Exorcism is Art of War gated" "defaut/Paladin.lua" "BuffPresent\(THEARTOFWAR\).*Spell\(EXORCISM\)" "CheckBoxOn\(coleredivine\)" 70 70
 Assert-Order "Ret Holy Wrath optional" "defaut/Paladin.lua" "AddCheckBox\(coleredivine" "CheckBoxOn\(coleredivine\).*Spell\(HOLYWRATH\)"
+
+$paladinLines = Get-Content -LiteralPath "defaut/Paladin.lua"
+for ($i = 0; $i -lt $paladinLines.Count; $i++) {
+    if ($paladinLines[$i] -match "Spell\(EXORCISM\)" -and $paladinLines[$i] -notmatch "BuffPresent\(THEARTOFWAR\)") {
+        throw "FAIL Ret Exorcism gate: line $($i + 1) can cast Exorcism without The Art of War"
+    }
+}
 Assert-Order "Fury Bloodsurge Slam before Bloodthirst" "defaut/Guerrier.lua" "BuffPresent\(SLAMBUFF\)" "^\s*if SpellKnown\(BLOODTHIRST\) Spell\(BLOODTHIRST\)$" 0 96
 Assert-Order "Arms Rend before Mortal Strike" "defaut/Guerrier.lua" "^\s*Spell\(REND\)$" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 0 116
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
