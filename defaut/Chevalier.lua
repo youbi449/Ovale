@@ -84,8 +84,8 @@ AddIcon help=main
 	{
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
-		if SpellKnown(DEATHSTRIKE) Spell(DEATHSTRIKE)
 		if SpellKnown(HEARTSTRIKE) Spell(HEARTSTRIKE)
+		if SpellKnown(DEATHSTRIKE) Spell(DEATHSTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
 	}

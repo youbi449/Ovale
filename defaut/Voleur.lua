@@ -35,6 +35,7 @@ AddCheckBox(selfbleed SpellName(RUPTURE) checked)
 SpellAddBuff(SLICEANDDICE SLICEANDDICE=21)
 SpellAddBuff(HUNGERFORBLOOD HUNGERFORBLOOD=60)
 SpellAddTargetDebuff(RUPTURE RUPTURE=16)
+SpellAddTargetDebuff(GARROTE GARROTE=18)
 SpellAddTargetDebuff(EXPOSEARMOR EXPOSEARMOR=30)
 
 AddIcon help=main
@@ -76,6 +77,11 @@ AddIcon help=main
 	{
 		if CheckBoxOn(expose) and ComboPoints(more 3) and SpellKnown(EXPOSEARMOR) and TargetDebuffExpires(EXPOSEARMOR 2) Spell(EXPOSEARMOR)
 		if ComboPoints(more 0) and BuffExpires(SLICEANDDICE 2) Spell(SLICEANDDICE)
+		if BuffPresent(SHADOWDANCE)
+		{
+			if SpellKnown(GARROTE) and TargetDebuffExpires(GARROTE 0 mine=1) Spell(GARROTE usable=1)
+			if ComboPoints(less 5) and SpellKnown(AMBUSH) Spell(AMBUSH usable=1)
+		}
 		if ComboPoints(more 4) and TargetDeadIn(more 10) and TargetDebuffExpires(RUPTURE 0 mine=1)
 		{
 			if SpellKnown(SHADOWSTEP) Spell(SHADOWSTEP)
