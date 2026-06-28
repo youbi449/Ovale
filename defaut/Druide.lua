@@ -68,7 +68,9 @@ AddIcon help=main
 		if SpellKnown(TIGERSFURY) and Mana(less 40) Spell(TIGERSFURY)
 		if ComboPoints(more 0) and SpellKnown(SAVAGEROAR) and BuffExpires(SAVAGEROAR 2) Spell(SAVAGEROAR priority=4)
 		if SpellKnown(FAERIEFERAL) and TargetDebuffExpires(FAERIEFERAL 2) Spell(FAERIEFERAL)
-		if SpellKnown(SHRED) and BuffPresent(CLEARCASTING) Spell(SHRED)
+		if SpellKnown(MANGLECAT) and TargetDebuffExpires(MANGLECAT 2) and TargetDebuffExpires(TRAUMA 0) Spell(MANGLECAT)
+		if SpellKnown(RAKE) and TargetDebuffExpires(RAKE 0 mine=1) and TargetDeadIn(more 9) Spell(RAKE)
+		if ComboPoints(less 5) and SpellKnown(SHRED) and BuffPresent(CLEARCASTING) Spell(SHRED)
 		if ComboPoints(more 4)
 		{
 			if TargetDeadIn(less 7) and SpellKnown(FEROCIOUSBITE) Spell(FEROCIOUSBITE priority=4)
@@ -78,8 +80,6 @@ AddIcon help=main
 				if SpellKnown(FEROCIOUSBITE) Spell(FEROCIOUSBITE)
 			}
 		}
-		if SpellKnown(MANGLECAT) and TargetDebuffExpires(MANGLECAT 2) and TargetDebuffExpires(TRAUMA 0) Spell(MANGLECAT)
-		if SpellKnown(RAKE) and TargetDebuffExpires(RAKE 0 mine=1) and TargetDeadIn(more 9) Spell(RAKE)
 		if CheckBoxOn(shred) and SpellKnown(SHRED) and Mana(more 69) Spell(SHRED priority=2)
 		if CheckBoxOff(shred) and SpellKnown(CLAW) Spell(CLAW)
 		if SpellKnown(CLAW) Spell(CLAW)
