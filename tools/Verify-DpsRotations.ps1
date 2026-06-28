@@ -63,6 +63,52 @@ if ($missingFromToc) {
     throw "Missing from Ovale.toc: $($missingFromToc -join ', ')"
 }
 
+$allowedFunctions = @(
+    "AddCheckBox",
+    "AddIcon",
+    "AddListItem",
+    "BuffExpires",
+    "BuffPresent",
+    "CheckBoxOff",
+    "CheckBoxOn",
+    "ComboPoints",
+    "Define",
+    "Glyph",
+    "HasShield",
+    "InCombat",
+    "Item",
+    "L",
+    "List",
+    "Mana",
+    "ManaPercent",
+    "PetPresent",
+    "ScoreSpells",
+    "Spell",
+    "SpellAddBuff",
+    "SpellAddTargetDebuff",
+    "SpellInfo",
+    "SpellKnown",
+    "SpellName",
+    "Stance",
+    "TalentPoints",
+    "TargetClassification",
+    "TargetDeadIn",
+    "TargetDebuffExpires",
+    "TargetDebuffPresent",
+    "TargetLifePercent",
+    "TotemExpires",
+    "Tracking",
+    "WeaponEnchantExpires"
+)
+$functionCalls = Get-ChildItem "defaut" -Filter "*.lua" |
+    ForEach-Object { Select-String -LiteralPath $_.FullName -Pattern "\b[A-Za-z][A-Za-z0-9]*\(" -AllMatches } |
+    ForEach-Object { $_.Matches.Value.TrimEnd("(") } |
+    Sort-Object -Unique
+$unknownFunctions = $functionCalls | Where-Object { $allowedFunctions -notcontains $_ }
+if ($unknownFunctions) {
+    throw "Unknown Ovale script functions: $($unknownFunctions -join ', ')"
+}
+
 $coverageChecks = @(
     @{ Spec = "Warrior Arms"; File = "defaut/Guerrier.lua"; Patterns = @("REND", "TASTEFORBLOOD", "OVERPOWER", "MORTALSTRIKE", "SUDDENDEATH", "SLAMTALENT") },
     @{ Spec = "Warrior Fury"; File = "defaut/Guerrier.lua"; Patterns = @("SLAMBUFF", "BLOODTHIRST", "WHIRLWIND", "EXECUTE", "BLOODRAGE") },
@@ -185,4 +231,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, $($coverageChecks.Count) DPS specs, 25 priority rules verified"
+Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 25 priority rules verified"
