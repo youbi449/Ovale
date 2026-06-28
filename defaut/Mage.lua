@@ -37,7 +37,7 @@ Define(BLIZZARD 10)
 Define(FLAMESTRIKE 2120)
 
 AddCheckBox(scorchdebuff SpellName(SCORCH) talent=TALENTIMPROVEDSCORSH)
-AddCheckBox(abarr SpellName(ARCANEBARRAGE) checked talent=TALENTARCANEBARRAGE)
+AddCheckBox(abarr SpellName(ARCANEBARRAGE) talent=TALENTARCANEBARRAGE)
 
 SpellAddTargetDebuff(LIVINGBOMB LIVINGBOMB=12)
 SpellAddTargetDebuff(IMPROVEDSCORCH IMPROVEDSCORCH=30)

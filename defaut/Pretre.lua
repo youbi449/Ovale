@@ -19,8 +19,10 @@ Define(MINDSEAR 48045)
 Define(HOLYNOVA 15237)
 Define(Heroism 32182)
 Define(Bloodlust 2825)
+Define(SHADOWWEAVING 15332)
 
 AddCheckBox(swd SpellName(SWD))
+AddCheckBox(swpweaving SpellName(SWP) checked)
 
 SpellAddTargetDebuff(SWP SWP=18)
 SpellAddTargetDebuff(VT VT=15)
@@ -42,7 +44,8 @@ AddIcon help=main
 	{
 		if SpellKnown(VT) and TargetDebuffExpires(VT 1.4 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(VT)
 		if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
-		if SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+		if CheckBoxOff(swpweaving) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+		if CheckBoxOn(swpweaving) and BuffPresent(SHADOWWEAVING stacks=5) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
 		if SpellKnown(MB) Spell(MB)
 		if CheckBoxOn(swd) and SpellKnown(SWD) Spell(SWD priority=2)
 		if SpellKnown(MF) Spell(MF priority=2)
