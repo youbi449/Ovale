@@ -61,8 +61,8 @@ AddIcon help=main
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
 		if BuffPresent(FREEZINGFOG) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
+		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) and { TargetDebuffExpires(BLOODPLAGUE 4) or TargetDebuffExpires(FROSTFEVER 4) } Spell(PESTILENCE)
 		if SpellKnown(OBLITERATE) Spell(OBLITERATE)
-		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if BuffPresent(KILLINGMACHINE) and SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
 		if SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
@@ -73,7 +73,7 @@ AddIcon help=main
 	{
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
-		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE)
+		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) and { TargetDebuffExpires(BLOODPLAGUE 4) or TargetDebuffExpires(FROSTFEVER 4) } Spell(PESTILENCE)
 		if CheckBoxOn(dnd) and SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
 		if SpellKnown(SCOURGESTRIKE) Spell(SCOURGESTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
