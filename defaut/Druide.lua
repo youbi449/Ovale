@@ -33,6 +33,7 @@ Define(GLYPHOFRIP 54818)
 
 AddCheckBox(demo SpellName(DEMOROAR))
 AddCheckBox(shred SpellName(SHRED) checked)
+AddCheckBox(moonfire SpellName(MOONFIRE))
 AddCheckBox(aoe L(AOE))
 
 SpellAddTargetDebuff(FAERIEFIRE FAERIEFIRE=300)
@@ -88,7 +89,7 @@ AddIcon help=main
 	{
 		if SpellKnown(FAERIEFIRE) and TargetDebuffExpires(FAERIEFIRE 2) and TargetDeadIn(more 10) Spell(FAERIEFIRE)
 		if SpellKnown(INSECTSWARM) and TargetDebuffExpires(INSECTSWARM 0 mine=1) and TargetDeadIn(more 12) Spell(INSECTSWARM)
-		if SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
+		if CheckBoxOn(moonfire) and SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
 		if BuffPresent(ECLIPSEWRATH) and SpellKnown(STARFIRE) Spell(STARFIRE)
 		if BuffPresent(ECLIPSESTARFIRE) and SpellKnown(WRATH) Spell(WRATH)
 		if SpellKnown(STARFIRE) Spell(STARFIRE)
@@ -117,7 +118,7 @@ AddIcon help=aoe
 		if SpellKnown(TYPHOON) Spell(TYPHOON)
 		if SpellKnown(HURRICANE) Spell(HURRICANE)
 		if SpellKnown(INSECTSWARM) and TargetDebuffExpires(INSECTSWARM 0 mine=1) and TargetDeadIn(more 12) Spell(INSECTSWARM)
-		if SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
+		if CheckBoxOn(moonfire) and SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
 		if SpellKnown(STARFIRE) Spell(STARFIRE)
 		if SpellKnown(WRATH) Spell(WRATH)
 	}
