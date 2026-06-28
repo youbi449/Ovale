@@ -77,6 +77,7 @@ AddIcon help=main
 		if SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
 		if SpellKnown(SCOURGESTRIKE) Spell(SCOURGESTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
+		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
 		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
 	}
 

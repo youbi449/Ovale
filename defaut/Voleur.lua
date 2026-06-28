@@ -30,6 +30,7 @@ Define(SHADOWDANCE 51713)
 Define(AMBUSH 8676)
 
 AddCheckBox(expose SpellName(EXPOSEARMOR))
+AddCheckBox(selfbleed SpellName(RUPTURE) checked)
 
 SpellAddBuff(SLICEANDDICE SLICEANDDICE=21)
 SpellAddBuff(HUNGERFORBLOOD HUNGERFORBLOOD=60)
@@ -40,6 +41,17 @@ AddIcon help=main
 {
 	if SpellKnown(HUNGERFORBLOOD)
 	{
+		if CheckBoxOn(selfbleed)
+			and BuffExpires(HUNGERFORBLOOD 2)
+			and TargetDebuffExpires(RUPTURE 0)
+			and TargetDebuffExpires(DEEPWOUNDS 0)
+			and TargetDebuffExpires(REND 0)
+			and TargetDebuffExpires(RIP 0)
+			and TargetDebuffExpires(GARROTE 0)
+		{
+			if SpellKnown(GARROTE) Spell(GARROTE usable=1)
+			if ComboPoints(more 0) and SpellKnown(RUPTURE) Spell(RUPTURE)
+		}
 		if { TargetDebuffPresent(RUPTURE) or TargetDebuffPresent(DEEPWOUNDS) or TargetDebuffPresent(REND) or TargetDebuffPresent(RIP) or TargetDebuffPresent(GARROTE) } and BuffExpires(HUNGERFORBLOOD 2) Spell(HUNGERFORBLOOD)
 		if ComboPoints(more 0) and BuffExpires(SLICEANDDICE 2) Spell(SLICEANDDICE)
 		if CheckBoxOn(expose) and ComboPoints(more 3) and SpellKnown(EXPOSEARMOR) and TargetDebuffExpires(EXPOSEARMOR 2) Spell(EXPOSEARMOR)
