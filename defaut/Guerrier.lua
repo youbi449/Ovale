@@ -98,22 +98,19 @@ AddIcon help=main
 		if SpellKnown(SHOCKWAVE) Spell(SHOCKWAVE)
 		if SpellKnown(CONCUSSIONBLOW) Spell(CONCUSSIONBLOW)
 
-		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
-		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
-		if SpellKnown(EXECUTE) and TargetLifePercent(less 20) Spell(EXECUTE usable=1)
-		if SpellKnown(VICTORY) Spell(VICTORY usable=1)
-
 		if SpellKnown(SLAM) and BuffPresent(SLAMBUFF)
 		{
 			if BuffExpires(SLAMBUFF 2.5)
 				Spell(SLAM nored=1)
-			if BuffDuration(SLAMBUFF more 6) and 1s before Spell(BLOODTHIRST) and { 1s before Spell(WHIRLWIND) or CheckBoxOff(whirlwind) }
-				Spell(SLAM nored=1)
 			Spell(SLAM priority=2 nored=1)
 		}
 
+		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
+		if SpellKnown(VICTORY) Spell(VICTORY usable=1)
 		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
 		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
+		if SpellKnown(EXECUTE) and TargetLifePercent(less 20) Spell(EXECUTE usable=1)
 	}
 
 	if Stance(1) # Battle
