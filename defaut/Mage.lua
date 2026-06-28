@@ -58,8 +58,8 @@ AddIcon help=main
 	if SpellKnown(LIVINGBOMB)
 	{
 		if CheckBoxOn(scorchdebuff) and SpellKnown(SCORCH) and TargetDebuffExpires(IMPROVEDSCORCH 6) and TargetDeadIn(more 15) Spell(SCORCH)
-		if BuffPresent(HOTSTREAK) and SpellKnown(PYROBLAST) Spell(PYROBLAST)
 		if TargetDebuffExpires(LIVINGBOMB 0 mine=1) and TargetDeadIn(more 12) Spell(LIVINGBOMB)
+		if BuffPresent(HOTSTREAK) and SpellKnown(PYROBLAST) Spell(PYROBLAST)
 		if SpellKnown(FROSTFIREBOLT) and TalentPoints(TALENTPIERCINGICE more 0) Spell(FROSTFIREBOLT)
 		if SpellKnown(FIREBALL) Spell(FIREBALL)
 	}

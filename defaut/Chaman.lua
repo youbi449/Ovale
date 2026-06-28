@@ -78,12 +78,12 @@ AddIcon help=main
 		}
 		if SpellKnown(WATERSHIELD) and BuffExpires(WATERSHIELD 2) Spell(WATERSHIELD)
 		if SpellKnown(TOTEMOFWRATH) and TotemExpires(fire) Spell(TOTEMOFWRATH)
-		if SpellKnown(SEARINGTOTEM) and TotemExpires(fire) Spell(SEARINGTOTEM priority=2)
 		if SpellKnown(FLAMESHOCK) and TargetDebuffExpires(FLAMESHOCK 0 mine=1) Spell(FLAMESHOCK)
 		if SpellKnown(LAVABURST)
 		{
 			unless TargetDebuffExpires(FLAMESHOCK 1.6 haste=spell mine=1) Spell(LAVABURST)
 		}
+		if SpellKnown(SEARINGTOTEM) and TotemExpires(fire) Spell(SEARINGTOTEM priority=2)
 		if CheckBoxOn(chain) and SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
 		if SpellKnown(LIGHTNINGBOLT) Spell(LIGHTNINGBOLT)
 		if SpellKnown(FROSTSHOCK) Spell(FROSTSHOCK priority=2)
