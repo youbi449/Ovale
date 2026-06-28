@@ -71,7 +71,7 @@ AddIcon help=main
 		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
 		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
-		if TargetDebuffPresent(SERPENTSTING) Spell(CHIMERASHOT)
+		if TargetDebuffPresent(SERPENTSTING mine=1) Spell(CHIMERASHOT)
 		if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
 		if CheckBoxOn(arcane) and SpellKnown(ARCANESHOT) Spell(ARCANESHOT)
 		if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
