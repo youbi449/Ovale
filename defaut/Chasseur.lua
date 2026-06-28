@@ -33,6 +33,7 @@ Define(TRACKUNDEAD 19884)
 
 AddCheckBox(multi SpellName(MULTISHOT))
 AddCheckBox(arcane SpellName(ARCANESHOT) checked)
+AddCheckBox(trapweave SpellName(EXPLOSIVETRAP))
 
 SpellAddTargetDebuff(SERPENTSTING SERPENTSTING=15)
 SpellAddTargetDebuff(BLACKARROW BLACKARROW=15)
@@ -56,7 +57,7 @@ AddIcon help=main
 	if SpellKnown(EXPLOSIVESHOT)
 	{
 		Spell(EXPLOSIVESHOT)
-		if SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
+		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 		if SpellKnown(BLACKARROW) and TargetDebuffExpires(BLACKARROW 0 mine=1) and TargetDeadIn(more 8) Spell(BLACKARROW)
 		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
@@ -69,7 +70,7 @@ AddIcon help=main
 	{
 		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
-		if SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
+		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 		if TargetDebuffPresent(SERPENTSTING) Spell(CHIMERASHOT)
 		if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
 		if CheckBoxOn(arcane) and SpellKnown(ARCANESHOT) Spell(ARCANESHOT)
@@ -77,7 +78,7 @@ AddIcon help=main
 	}
 
 	if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
-	if SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
+	if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 	if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
 	if CheckBoxOn(multi) and SpellKnown(MULTISHOT) Spell(MULTISHOT)
 	if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
