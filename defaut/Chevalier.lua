@@ -40,6 +40,7 @@ Define(GLYPHHOWLINGBLAST 63335)
 Define(GLYPHOFRAISEDEAD 60200)
 
 AddCheckBox(rolldes SpellName(GLYPHDISEASE) checked glyph=GLYPHDISEASE)
+AddCheckBox(dnd SpellName(DEATHANDECAY) checked)
 AddCheckBox(aoe L(AOE))
 
 SpellAddTargetDebuff(BLOODPLAGUE BLOODPLAGUE=15)
@@ -73,7 +74,7 @@ AddIcon help=main
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
 		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE)
-		if SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
+		if CheckBoxOn(dnd) and SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
 		if SpellKnown(SCOURGESTRIKE) Spell(SCOURGESTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
