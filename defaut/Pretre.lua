@@ -20,6 +20,8 @@ Define(HOLYNOVA 15237)
 Define(Heroism 32182)
 Define(Bloodlust 2825)
 
+AddCheckBox(swd SpellName(SWD))
+
 SpellAddTargetDebuff(SWP SWP=18)
 SpellAddTargetDebuff(VT VT=15)
 SpellAddTargetDebuff(DP DP=24)
@@ -40,9 +42,9 @@ AddIcon help=main
 	{
 		if SpellKnown(VT) and TargetDebuffExpires(VT 1.4 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(VT)
 		if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
-		if SpellKnown(MB) Spell(MB)
-		if SpellKnown(SWD) Spell(SWD priority=2)
 		if SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+		if SpellKnown(MB) Spell(MB)
+		if CheckBoxOn(swd) and SpellKnown(SWD) Spell(SWD priority=2)
 		if SpellKnown(MF) Spell(MF priority=2)
 	}
 

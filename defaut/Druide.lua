@@ -72,7 +72,10 @@ AddIcon help=main
 		{
 			if TargetDeadIn(less 7) and SpellKnown(FEROCIOUSBITE) Spell(FEROCIOUSBITE priority=4)
 			if SpellKnown(RIP) and TargetDebuffExpires(RIP 0 mine=1) and TargetDeadIn(more 8) Spell(RIP priority=4)
-			if SpellKnown(FEROCIOUSBITE) Spell(FEROCIOUSBITE)
+			unless BuffExpires(SAVAGEROAR 6) or TargetDebuffExpires(RIP 6 mine=1)
+			{
+				if SpellKnown(FEROCIOUSBITE) Spell(FEROCIOUSBITE)
+			}
 		}
 		if SpellKnown(MANGLECAT) and TargetDebuffExpires(MANGLECAT 2) and TargetDebuffExpires(TRAUMA 0) Spell(MANGLECAT)
 		if SpellKnown(RAKE) and TargetDebuffExpires(RAKE 0 mine=1) and TargetDeadIn(more 9) Spell(RAKE)
