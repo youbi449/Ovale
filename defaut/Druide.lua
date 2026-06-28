@@ -34,6 +34,7 @@ Define(GLYPHOFRIP 54818)
 AddCheckBox(demo SpellName(DEMOROAR))
 AddCheckBox(shred SpellName(SHRED) checked)
 AddCheckBox(moonfire SpellName(MOONFIRE))
+AddCheckBox(wrathfiller SpellName(WRATH) checked)
 AddCheckBox(aoe L(AOE))
 
 SpellAddTargetDebuff(FAERIEFIRE FAERIEFIRE=300)
@@ -92,6 +93,7 @@ AddIcon help=main
 		if CheckBoxOn(moonfire) and SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
 		if BuffPresent(ECLIPSESTARFIRE) and SpellKnown(STARFIRE) Spell(STARFIRE)
 		if BuffPresent(ECLIPSEWRATH) and SpellKnown(WRATH) Spell(WRATH)
+		if CheckBoxOn(wrathfiller) and SpellKnown(WRATH) Spell(WRATH)
 		if SpellKnown(STARFIRE) Spell(STARFIRE)
 		if SpellKnown(WRATH) Spell(WRATH)
 	}

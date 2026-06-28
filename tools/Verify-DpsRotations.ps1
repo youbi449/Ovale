@@ -111,6 +111,7 @@ Assert-Order "Destro Warlock Immolate before Conflagrate" "defaut/Demoniste.lua"
 Assert-Order "Feral Rake before Rip" "defaut/Druide.lua" "Spell\(RAKE" "Spell\(RIP priority=4\)"
 Assert-Order "Balance Moonfire optional" "defaut/Druide.lua" "AddCheckBox\(moonfire" "CheckBoxOn\(moonfire\).*Spell\(MOONFIRE"
 Assert-Order "Balance Eclipse Starfire buff casts Starfire" "defaut/Druide.lua" "BuffPresent\(ECLIPSESTARFIRE\).*Spell\(STARFIRE\)" "BuffPresent\(ECLIPSEWRATH\).*Spell\(WRATH\)"
+Assert-Order "Balance Wrath default filler before generic Starfire" "defaut/Druide.lua" "CheckBoxOn\(wrathfiller\).*Spell\(WRATH\)" "^\s*if SpellKnown\(STARFIRE\) Spell\(STARFIRE\)$" 0 90
 Assert-Order "Elemental Flame Shock before Lava Burst" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(LAVABURST" 73 0
 Assert-Order "Fire Mage Living Bomb before Hot Streak" "defaut/Mage.lua" "Spell\(LIVINGBOMB" "HOTSTREAK.*Spell\(PYROBLAST"
 Assert-Order "Arcane Barrage optional" "defaut/Mage.lua" "AddCheckBox\(abarr" "CheckBoxOn\(abarr\).*Spell\(ARCANEBARRAGE"
@@ -183,4 +184,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, $($coverageChecks.Count) DPS specs, 23 priority rules verified"
+Write-Host "OK: XML, TOC, $($coverageChecks.Count) DPS specs, 24 priority rules verified"
