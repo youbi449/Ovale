@@ -57,14 +57,13 @@ AddIcon help=main
 
 	if SpellKnown(HOWLINGBLAST) or SpellKnown(FROSTSTRIKE)
 	{
-		if SpellKnown(HOWLINGBLAST) and Glyph(GLYPHHOWLINGBLAST) Spell(HOWLINGBLAST)
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
+		if BuffPresent(FREEZINGFOG) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
 		if SpellKnown(OBLITERATE) Spell(OBLITERATE)
 		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if BuffPresent(KILLINGMACHINE) and SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
-		if BuffPresent(FREEZINGFOG) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
 		if SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
 		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
 	}

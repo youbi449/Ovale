@@ -51,8 +51,6 @@ AddIcon help=main
 		}
 
 		if SpellKnown(LIGHTNINGSHIELD) and BuffExpires(LIGHTNINGSHIELD 2) Spell(LIGHTNINGSHIELD)
-		if SpellKnown(FIREELEMENTALTOTEM) Spell(FIREELEMENTALTOTEM)
-		if SpellKnown(FERALSPIRIT) Spell(FERALSPIRIT)
 		if BuffPresent(MAELSTROMWEAPON stacks=5)
 		{
 			if CheckBoxOn(chain) and SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
