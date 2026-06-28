@@ -69,9 +69,9 @@ AddIcon help=main
 
 	if SpellKnown(DIVINESTORM) or SpellKnown(CRUSADERSTRIKE)
 	{
-		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
 		if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
 		if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
+		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
 		if SpellKnown(CRUSADERSTRIKE) Spell(CRUSADERSTRIKE)
 		if CheckBoxOn(reckoning) and SpellKnown(HANDOFRECKONING) Spell(HANDOFRECKONING usable=1)
 		if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
