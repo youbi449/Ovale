@@ -58,7 +58,6 @@ AddIcon help=main
 	{
 		Spell(EXPLOSIVESHOT)
 		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
-		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 		if SpellKnown(BLACKARROW) and TargetDebuffExpires(BLACKARROW 0 mine=1) and TargetDeadIn(more 8) Spell(BLACKARROW)
 		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
 		if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
@@ -68,7 +67,6 @@ AddIcon help=main
 
 	if SpellKnown(CHIMERASHOT)
 	{
-		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
 		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 		if TargetDebuffPresent(SERPENTSTING mine=1) Spell(CHIMERASHOT)
@@ -77,7 +75,6 @@ AddIcon help=main
 		if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
 	}
 
-	if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
 	if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 	if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
 	if CheckBoxOn(multi) and SpellKnown(MULTISHOT) Spell(MULTISHOT)

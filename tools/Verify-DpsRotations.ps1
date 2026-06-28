@@ -193,6 +193,13 @@ foreach ($line in $holyWrathLines) {
     }
 }
 
+$hunterMainKillCommandLines = Get-Content -LiteralPath "defaut/Chasseur.lua" |
+    Select-String -Pattern "Spell\(KILLCOMMAND" |
+    Where-Object { $_.LineNumber -lt 98 }
+if ($hunterMainKillCommandLines) {
+    throw "Kill Command should stay in the Hunter CD icon, not main rotation"
+}
+
 if (-not $SkipLuaParse) {
     $tmp = Join-Path $env:TEMP "ovale-luaparse-check"
     New-Item -ItemType Directory -Force -Path $tmp | Out-Null
@@ -231,4 +238,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 25 priority rules verified"
+Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 26 priority rules verified"
