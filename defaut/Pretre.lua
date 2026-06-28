@@ -52,7 +52,8 @@ AddIcon help=main
 	}
 
 	if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
-	if SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+	if CheckBoxOff(swpweaving) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+	if CheckBoxOn(swpweaving) and BuffPresent(SHADOWWEAVING stacks=5) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
 	if SpellKnown(HOLYFIRE) Spell(HOLYFIRE)
 	if SpellKnown(MB) Spell(MB)
 	if SpellKnown(SMITE) Spell(SMITE)
@@ -63,7 +64,8 @@ AddIcon help=aoe
 	if SpellKnown(MINDSEAR) Spell(MINDSEAR)
 	if SpellKnown(HOLYNOVA) Spell(HOLYNOVA)
 	if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
-	if SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+	if CheckBoxOff(swpweaving) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+	if CheckBoxOn(swpweaving) and BuffPresent(SHADOWWEAVING stacks=5) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
 	if SpellKnown(MF) Spell(MF priority=2)
 	if SpellKnown(HOLYFIRE) Spell(HOLYFIRE)
 	if SpellKnown(SMITE) Spell(SMITE)

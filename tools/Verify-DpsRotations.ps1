@@ -116,6 +116,15 @@ Assert-Order "Shadow Word Death optional" "defaut/Pretre.lua" "AddCheckBox\(swd"
 Assert-Order "Sub Rogue Ambush before Hemorrhage" "defaut/Voleur.lua" "Spell\(AMBUSH" "^\s*Spell\(HEMORRHAGE\)$"
 Assert-Order "Assassination Hunger for Blood before Envenom" "defaut/Voleur.lua" "Spell\(HUNGERFORBLOOD\)" "Spell\(ENVENOM\)"
 
+$shadowPainLines = Get-Content -LiteralPath "defaut/Pretre.lua" |
+    Select-String -Pattern "Spell\(SWP\)" |
+    Where-Object { $_.Line -notmatch "AddIcon size=small" }
+foreach ($line in $shadowPainLines) {
+    if ($line.Line -notmatch "CheckBoxOff\(swpweaving\)" -and $line.Line -notmatch "SHADOWWEAVING stacks=5") {
+        throw "Shadow Word: Pain is not weaving-gated at line $($line.LineNumber)"
+    }
+}
+
 if (-not $SkipLuaParse) {
     $tmp = Join-Path $env:TEMP "ovale-luaparse-check"
     New-Item -ItemType Directory -Force -Path $tmp | Out-Null
