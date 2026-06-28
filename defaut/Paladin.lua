@@ -96,7 +96,7 @@ AddIcon help=aoe
 	if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
 	if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
 	if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
-	if SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
+	if CheckBoxOn(coleredivine) and SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
 	if HasShield() and SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
 	if HasShield() and SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
 	if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)

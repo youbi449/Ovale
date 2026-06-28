@@ -97,6 +97,7 @@ foreach ($check in $coverageChecks) {
 
 Assert-Order "Ret Judgement before Crusader Strike" "defaut/Paladin.lua" "List\(jugement lumiere\).*JUDGELIGHT" "Spell\(CRUSADERSTRIKE\)" 70 70
 Assert-Order "Ret Exorcism is Art of War gated" "defaut/Paladin.lua" "BuffPresent\(THEARTOFWAR\).*Spell\(EXORCISM\)" "CheckBoxOn\(coleredivine\)" 70 70
+Assert-Order "Ret Holy Wrath optional" "defaut/Paladin.lua" "AddCheckBox\(coleredivine" "CheckBoxOn\(coleredivine\).*Spell\(HOLYWRATH\)"
 Assert-Order "Fury Bloodsurge Slam before Bloodthirst" "defaut/Guerrier.lua" "BuffPresent\(SLAMBUFF\)" "^\s*if SpellKnown\(BLOODTHIRST\) Spell\(BLOODTHIRST\)$" 0 96
 Assert-Order "Arms Rend before Mortal Strike" "defaut/Guerrier.lua" "^\s*Spell\(REND\)$" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 0 116
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
@@ -133,6 +134,14 @@ $mainDeathKnightLines = Get-Content -LiteralPath "defaut/Chevalier.lua" |
 foreach ($line in $mainDeathKnightLines) {
     if ($line.Line -notmatch "TargetDebuffExpires\(BLOODPLAGUE 4\)" -or $line.Line -notmatch "TargetDebuffExpires\(FROSTFEVER 4\)") {
         throw "Death Knight Glyph of Disease Pestilence is not expiry-gated at line $($line.LineNumber)"
+    }
+}
+
+$holyWrathLines = Get-Content -LiteralPath "defaut/Paladin.lua" |
+    Select-String -Pattern "Spell\(HOLYWRATH\)"
+foreach ($line in $holyWrathLines) {
+    if ($line.Line -notmatch "CheckBoxOn\(coleredivine\)") {
+        throw "Holy Wrath is not option-gated at line $($line.LineNumber)"
     }
 }
 
@@ -174,4 +183,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, $($coverageChecks.Count) DPS specs, 22 priority rules verified"
+Write-Host "OK: XML, TOC, $($coverageChecks.Count) DPS specs, 23 priority rules verified"
