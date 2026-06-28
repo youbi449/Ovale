@@ -85,11 +85,11 @@ AddIcon help=main
 
 	if SpellKnown(METAMORPHOSIS)
 	{
-		if BuffPresent(DECIMATION) and SpellKnown(SOULFIRE) Spell(SOULFIRE)
 		if List(curse doom) and SpellKnown(CURSEDOOM) and TargetDebuffExpires(CURSEDOOM 1 mine=1) and TargetDeadIn(more 60) Spell(CURSEDOOM)
 		if List(curse agony) and SpellKnown(CURSEAGONY) and TargetDebuffExpires(CURSEAGONY 1 mine=1) and TargetDeadIn(more 10) Spell(CURSEAGONY)
 		if SpellKnown(IMMOLATE) and TargetDebuffExpires(IMMOLATE 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(IMMOLATE)
 		if SpellKnown(CORRUPTION) and TargetDebuffExpires(CORRUPTION 1 mine=1) and TargetDeadIn(more 9) Spell(CORRUPTION)
+		if BuffPresent(DECIMATION) and SpellKnown(SOULFIRE) Spell(SOULFIRE)
 		if BuffPresent(MOLTENCORE) and SpellKnown(INCINERATE) Spell(INCINERATE)
 		if SpellKnown(SHADOWBOLT) Spell(SHADOWBOLT)
 	}
