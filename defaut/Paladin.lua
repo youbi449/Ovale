@@ -104,6 +104,7 @@ AddIcon help=aoe
 
 AddIcon help=cd
 {
+	if SpellKnown(DIVINEPLEA) and ManaPercent(less 35) Spell(DIVINEPLEA)
 	if SpellKnown(AVENGINGWRATH) Spell(AVENGINGWRATH)
 }
 ]]

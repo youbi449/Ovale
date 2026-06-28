@@ -70,6 +70,7 @@ AddIcon help=main
 	}
 
 	if Glyph(GLYPHLIFETAP) and SpellKnown(LIFETAP) and BuffExpires(LIFETAP 0) Spell(LIFETAP)
+	if SpellKnown(LIFETAP) and ManaPercent(less 20) Spell(LIFETAP priority=2)
 	if List(curse elements) and SpellKnown(CURSEELEMENTS) and TargetDebuffExpires(CURSEELEMENTS 2) and TargetDeadIn(more 8) Spell(CURSEELEMENTS)
 
 	if SpellKnown(HAUNT) or SpellKnown(UNSTABLEAFFLICTION)
