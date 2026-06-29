@@ -19,6 +19,8 @@ Define(ASPECTOFTHEVIPER 34074)
 Define(ASPECTOFTHEDRAGONHAWK 61846)
 Define(VOLLEY 1510)
 Define(EXPLOSIVETRAP 13813)
+Define(RAPTORSTRIKE 2973)
+Define(MONGOOSEBITE 1495)
 
 Define(TALENTCHIMSHOT 2135)
 Define(TALENTEXPLOSHOT 2145)
@@ -43,6 +45,8 @@ SpellInfo(CHIMERASHOT cd=10)
 SpellInfo(AIMEDSHOT cd=10)
 SpellInfo(ARCANESHOT cd=6)
 SpellInfo(MULTISHOT cd=10)
+SpellInfo(RAPTORSTRIKE cd=6)
+SpellInfo(MONGOOSEBITE cd=5)
 
 AddIcon help=main
 {
@@ -52,6 +56,13 @@ AddIcon help=main
 		Spell(TRACKBEASTS)
 
 	if SpellKnown(HUNTERSMARK) and TargetDebuffExpires(HUNTERSMARK 0) and TargetDeadIn(more 15) Spell(HUNTERSMARK)
+
+	if SpellKnown(RAPTORSTRIKE) and TargetInRange(RAPTORSTRIKE)
+	{
+		if SpellKnown(MONGOOSEBITE) Spell(MONGOOSEBITE usable=1)
+		Spell(RAPTORSTRIKE)
+	}
+
 	if SpellKnown(KILLSHOT) and TargetLifePercent(less 20) Spell(KILLSHOT)
 
 	if SpellKnown(EXPLOSIVESHOT)
@@ -86,6 +97,11 @@ AddIcon help=main
 AddIcon help=aoe
 {
 	if SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
+	if SpellKnown(RAPTORSTRIKE) and TargetInRange(RAPTORSTRIKE)
+	{
+		if SpellKnown(MONGOOSEBITE) Spell(MONGOOSEBITE usable=1)
+		Spell(RAPTORSTRIKE)
+	}
 	if SpellKnown(VOLLEY) Spell(VOLLEY)
 	if SpellKnown(MULTISHOT) Spell(MULTISHOT)
 	if SpellKnown(EXPLOSIVESHOT) Spell(EXPLOSIVESHOT)
