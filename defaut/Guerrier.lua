@@ -55,6 +55,7 @@ SpellAddTargetDebuff(SUNDER SUNDER=30)
 SpellAddBuff(BATTLESHOUT BATTLESHOUT=120)
 SpellAddBuff(COMMANDSHOUT COMMANDSHOUT=120)
 SpellAddBuff(SLAM SLAMBUFF=-1)
+SpellAddBuff(SWEEPINGSTRIKES SWEEPINGSTRIKES=10)
 SpellInfo(WHIRLWIND cd=8)
 SpellInfo(BLOODTHIRST cd=4)
 SpellInfo(MORTALSTRIKE cd=6)
@@ -155,19 +156,18 @@ AddIcon help=aoe
 	{
 		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
 		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
-		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
+		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
 		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
-		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
+		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
 	}
 	if Stance(1) # Battle
 	{
-		if SpellKnown(REND) and TargetDebuffExpires(REND 0 mine=1) and TargetDeadIn(more 8) Spell(REND)
 		if SpellKnown(SWEEPINGSTRIKES) Spell(SWEEPINGSTRIKES)
-		if SpellKnown(OVERPOWER) Spell(OVERPOWER usable=1)
 		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
 		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
-		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
 		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
+		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(OVERPOWER) Spell(OVERPOWER usable=1)
+		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
 	}
 }
 

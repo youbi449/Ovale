@@ -160,6 +160,7 @@ Assert-Order "Arms Taste for Blood condition before Overpower" "defaut/Guerrier.
 Assert-Order "Arms Taste for Blood Overpower before Mortal Strike" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 116 116
 Assert-Order "Arms Taste for Blood Overpower before Bladestorm" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "Spell\(BLADESTORM\)" 116 116
 Assert-Order "Warrior Cleave is high rage dump" "defaut/Guerrier.lua" "Mana\(more 65\).*Spell\(CLEAVE\)" "Spell\(HEROICSTRIKE\)" 0 180
+Assert-Order "Warrior AoE Sweeping Strikes before single-target cleaves" "defaut/Guerrier.lua" "Spell\(SWEEPINGSTRIKES\)" "BuffPresent\(SWEEPINGSTRIKES\).*Spell\(OVERPOWER usable=1\)" 140 140
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
 Assert-Order "Hunter melee fallback before ranged execute" "defaut/Chasseur.lua" "TargetInRange\(RAPTORSTRIKE\)" "Spell\(KILLSHOT\)"
 Assert-Order "Hunter Mongoose before Raptor in melee fallback" "defaut/Chasseur.lua" "Spell\(MONGOOSEBITE usable=1\)" "Spell\(RAPTORSTRIKE\)" 0 75
@@ -200,6 +201,22 @@ $cleaveLines = Get-Content -LiteralPath "defaut/Guerrier.lua" |
 foreach ($line in $cleaveLines) {
     if ($line.Line -notmatch "Mana\(more 65\)") {
         throw "Warrior Cleave is not high-rage gated at line $($line.LineNumber)"
+    }
+}
+
+$warriorLines = Get-Content -LiteralPath "defaut/Guerrier.lua"
+$aoeStart = ($warriorLines | Select-String -Pattern "AddIcon help=aoe" | Select-Object -First 1).LineNumber
+$offgcdStart = ($warriorLines | Select-String -Pattern "AddIcon help=offgcd" | Select-Object -First 1).LineNumber
+$warriorAoeLines = $warriorLines[($aoeStart - 1)..($offgcdStart - 2)]
+$singleTargetAoeSpells = @("BLOODTHIRST", "SLAM", "OVERPOWER", "MORTALSTRIKE")
+for ($i = 0; $i -lt $warriorAoeLines.Count; $i++) {
+    foreach ($spell in $singleTargetAoeSpells) {
+        if ($warriorAoeLines[$i] -match "Spell\($spell" -and $warriorAoeLines[$i] -notmatch "BuffPresent\(SWEEPINGSTRIKES\)") {
+            throw "Warrior AoE $spell is not Sweeping Strikes-gated at line $($aoeStart + $i)"
+        }
+    }
+    if ($warriorAoeLines[$i] -match "Spell\(REND\)") {
+        throw "Warrior AoE should not propose Rend at line $($aoeStart + $i)"
     }
 }
 
