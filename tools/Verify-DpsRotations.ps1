@@ -154,6 +154,9 @@ for ($i = 0; $i -lt $paladinLines.Count; $i++) {
 }
 Assert-Order "Fury Bloodsurge Slam before Bloodthirst" "defaut/Guerrier.lua" "BuffPresent\(SLAMBUFF\)" "^\s*if SpellKnown\(BLOODTHIRST\) Spell\(BLOODTHIRST\)$" 0 96
 Assert-Order "Arms Rend before Mortal Strike" "defaut/Guerrier.lua" "^\s*Spell\(REND\)$" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 0 116
+Assert-Order "Arms Taste for Blood condition before Overpower" "defaut/Guerrier.lua" "BuffPresent\(TASTEFORBLOOD\)" "Spell\(OVERPOWER usable=1\)" 0 116
+Assert-Order "Arms Taste for Blood Overpower before Mortal Strike" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 116 116
+Assert-Order "Arms Taste for Blood Overpower before Bladestorm" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "Spell\(BLADESTORM\)" 116 116
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
 Assert-Order "Hunter melee fallback before ranged execute" "defaut/Chasseur.lua" "TargetInRange\(RAPTORSTRIKE\)" "Spell\(KILLSHOT\)"
 Assert-Order "Hunter Mongoose before Raptor in melee fallback" "defaut/Chasseur.lua" "Spell\(MONGOOSEBITE usable=1\)" "Spell\(RAPTORSTRIKE\)" 0 75

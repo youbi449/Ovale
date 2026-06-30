@@ -115,17 +115,11 @@ AddIcon help=main
 
 	if Stance(1) # Battle
 	{
-		if SpellKnown(OVERPOWER) and BuffExpires(TASTEFORBLOOD 1.5) and TargetDebuffExpires(REND 0 mine=1)
-			Spell(OVERPOWER usable=1)
 		if SpellKnown(REND) and TargetDebuffExpires(REND 0 mine=1) and TargetDeadIn(more 8)
 			Spell(REND)
-		if SpellKnown(OVERPOWER)
-		{
-			unless BuffPresent(TASTEFORBLOOD)
-				Spell(OVERPOWER usable=1)
-		}
-		if SpellKnown(OVERPOWER) and BuffExpires(TASTEFORBLOOD 4.5)
+		if SpellKnown(OVERPOWER) and BuffPresent(TASTEFORBLOOD)
 			Spell(OVERPOWER usable=1)
+		if SpellKnown(OVERPOWER) Spell(OVERPOWER usable=1)
 
 		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
 		if SpellKnown(EXECUTE) and { BuffPresent(SUDDENDEATH) or TargetLifePercent(less 20) } Spell(EXECUTE usable=1)
