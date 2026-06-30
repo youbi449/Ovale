@@ -191,7 +191,7 @@ AddIcon help=offgcd
 
 AddIcon help=mitigation
 {
-	if Stance(2) and TargetTargetIsPlayer()
+	if Stance(2) and { SpellKnown(SHIELDSLAM) or SpellKnown(DEVASTATE) or SpellKnown(LASTSTAND) } and TargetTargetIsPlayer()
 	{
 		if HasShield() and LifePercent(less 75) and SpellKnown(SHIELDBLOCK) Spell(SHIELDBLOCK usable=1)
 		if LifePercent(less 45) and SpellKnown(LASTSTAND) Spell(LASTSTAND usable=1)

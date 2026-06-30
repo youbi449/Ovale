@@ -139,7 +139,7 @@ AddIcon help=offgcd
 
 AddIcon help=mitigation
 {
-	if Stance(1) and TargetTargetIsPlayer()
+	if Stance(1) and { SpellKnown(SURVIVALINSTINCTS) or SpellKnown(MANGLEBEAR) } and TargetTargetIsPlayer()
 	{
 		if LifePercent(less 75) and SpellKnown(BARKSKIN) Spell(BARKSKIN usable=1)
 		if LifePercent(less 45) and SpellKnown(SURVIVALINSTINCTS) Spell(SURVIVALINSTINCTS usable=1)

@@ -132,7 +132,7 @@ AddIcon help=offgcd
 
 AddIcon help=mitigation
 {
-	if BuffPresent(FROSTPRESENCE) and TargetTargetIsPlayer()
+	if BuffPresent(FROSTPRESENCE) and { SpellKnown(BONESHIELD) or SpellKnown(UNBREAKABLEARMOR) or SpellKnown(VAMPIRICBLOOD) or SpellKnown(RUNETAP) } and TargetTargetIsPlayer()
 	{
 		if SpellKnown(BONESHIELD) and BuffExpires(BONESHIELD 2) Spell(BONESHIELD usable=1)
 		if LifePercent(less 70) and SpellKnown(ANTIMAGICSHELL) Spell(ANTIMAGICSHELL usable=1)

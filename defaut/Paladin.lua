@@ -111,7 +111,7 @@ AddIcon help=aoe
 
 AddIcon help=mitigation
 {
-	if HasShield() and TargetTargetIsPlayer()
+	if HasShield() and { SpellKnown(HAMMEROFTHERIGHTEOUS) or TalentPoints(TALENTGUARDEDBYTHELIGHT more 0) } and TargetTargetIsPlayer()
 	{
 		if LifePercent(less 90) and SpellKnown(SACREDSHIELD) and BuffExpires(SACREDSHIELD 2) Spell(SACREDSHIELD)
 		if LifePercent(less 45) and SpellKnown(DIVINEPROTECTION) Spell(DIVINEPROTECTION usable=1)
