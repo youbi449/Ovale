@@ -23,6 +23,9 @@ Define(AVENGERSSHIELD 31935)
 Define(HANDOFRECKONING 62124)
 Define(TALENTGUARDEDBYTHELIGHT 2194)
 Define(DIVINEPLEA 54428)
+Define(SACREDSHIELD 53601)
+Define(DIVINEPROTECTION 498)
+Define(LAYONHANDS 633)
 
 AddCheckBox(consecration SpellName(CONSECRATE) checked)
 AddCheckBox(coleredivine SpellName(HOLYWRATH))
@@ -39,6 +42,10 @@ SpellInfo(DIVINESTORM cd=10)
 SpellInfo(HAMMEROFTHERIGHTEOUS cd=6)
 SpellInfo(SHIELDOFRIGHTEOUSNESS cd=6)
 SpellInfo(AVENGERSSHIELD cd=30)
+SpellInfo(SACREDSHIELD cd=6)
+SpellInfo(DIVINEPROTECTION cd=180)
+SpellInfo(LAYONHANDS cd=1200)
+SpellAddBuff(SACREDSHIELD SACREDSHIELD=30)
 
 AddIcon help=main
 {
@@ -100,6 +107,16 @@ AddIcon help=aoe
 	if HasShield() and SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
 	if HasShield() and SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
 	if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
+}
+
+AddIcon help=mitigation
+{
+	if HasShield() and TargetTargetIsPlayer()
+	{
+		if LifePercent(less 90) and SpellKnown(SACREDSHIELD) and BuffExpires(SACREDSHIELD 2) Spell(SACREDSHIELD)
+		if LifePercent(less 45) and SpellKnown(DIVINEPROTECTION) Spell(DIVINEPROTECTION usable=1)
+		if LifePercent(less 20) and SpellKnown(LAYONHANDS) Spell(LAYONHANDS usable=1)
+	}
 }
 
 AddIcon help=cd

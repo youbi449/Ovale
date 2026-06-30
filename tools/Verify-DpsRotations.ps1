@@ -78,6 +78,7 @@ $allowedFunctions = @(
     "InCombat",
     "Item",
     "L",
+    "LifePercent",
     "List",
     "Mana",
     "ManaPercent",
@@ -97,6 +98,7 @@ $allowedFunctions = @(
     "TargetDebuffPresent",
     "TargetInRange",
     "TargetLifePercent",
+    "TargetTargetIsPlayer",
     "TotemExpires",
     "Tracking",
     "WeaponEnchantExpires"
@@ -180,6 +182,18 @@ Assert-Order "Shadow Word Death optional" "defaut/Pretre.lua" "AddCheckBox\(swd"
 Assert-Order "Sub Rogue Ambush before Hemorrhage" "defaut/Voleur.lua" "Spell\(AMBUSH" "^\s*Spell\(HEMORRHAGE\)$"
 Assert-Order "Assassination Hunger for Blood before Envenom" "defaut/Voleur.lua" "Spell\(HUNGERFORBLOOD\)" "Spell\(ENVENOM\)"
 
+$tankMitigationChecks = @(
+    @{ Class = "Warrior"; File = "defaut/Guerrier.lua"; Patterns = @("AddIcon help=mitigation", "TargetTargetIsPlayer", "LifePercent(less 75)", "SHIELDBLOCK", "LifePercent(less 45)", "LASTSTAND", "LifePercent(less 35)", "SHIELDWALL", "LifePercent(less 25)", "ENRAGEDREGENERATION") },
+    @{ Class = "Paladin"; File = "defaut/Paladin.lua"; Patterns = @("AddIcon help=mitigation", "TargetTargetIsPlayer", "LifePercent(less 90)", "SACREDSHIELD", "LifePercent(less 45)", "DIVINEPROTECTION", "LifePercent(less 20)", "LAYONHANDS") },
+    @{ Class = "Death Knight"; File = "defaut/Chevalier.lua"; Patterns = @("AddIcon help=mitigation", "FROSTPRESENCE", "TargetTargetIsPlayer", "BONESHIELD", "LifePercent(less 70)", "ANTIMAGICSHELL", "LifePercent(less 60)", "UNBREAKABLEARMOR", "LifePercent(less 55)", "RUNETAP", "LifePercent(less 45)", "VAMPIRICBLOOD", "LifePercent(less 35)", "ICEBOUNDFORTITUDE", "LifePercent(less 25)", "DEATHPACT") },
+    @{ Class = "Druid"; File = "defaut/Druide.lua"; Patterns = @("AddIcon help=mitigation", "TargetTargetIsPlayer", "LifePercent(less 75)", "BARKSKIN", "LifePercent(less 45)", "SURVIVALINSTINCTS", "LifePercent(less 30)", "FRENZIEDREGENERATION") }
+)
+foreach ($check in $tankMitigationChecks) {
+    foreach ($pattern in $check.Patterns) {
+        Assert-Match -File $check.File -Pattern ([regex]::Escape($pattern)) -Message "MISS $($check.Class) tank mitigation: $pattern"
+    }
+}
+
 $shadowPainLines = Get-Content -LiteralPath "defaut/Pretre.lua" |
     Select-String -Pattern "Spell\(SWP\)" |
     Where-Object { $_.Line -notmatch "AddIcon size=small" }
@@ -251,4 +265,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 26 priority rules verified"
+Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 26 priority rules, 4 tank mitigation icons verified"

@@ -32,6 +32,7 @@ L["Cacher si cible amicale ou morte"] = true
 L["main"] = "Attaque principale"
 L["offgcd"] = "Attaque hors temps de recharge globale.\nLancer en parallèle de l'attaque principale."
 L["cd"] = "Techniques à longs temps de recharge.\nLancer dès que possible ou conserver pour les phases de dégâts amplifiés."
+L["mitigation"] = "Mitigation tank et techniques de survie d'urgence."
 L["aoe"] = "Attaque multi-cible"
 L["mana"] = "Regain de mana"
 L["Cliquer pour afficher/cacher les options"] = true

@@ -22,6 +22,9 @@ Define(RAKE 59886)
 Define(SAVAGEROAR 52610)
 Define(FEROCIOUSBITE 22568)
 Define(BERSERK 50334)
+Define(BARKSKIN 22812)
+Define(SURVIVALINSTINCTS 61336)
+Define(FRENZIEDREGENERATION 22842)
 Define(CLEARCASTING 16870)
 Define(CLAW 16827)
 Define(STARFALL 48505)
@@ -51,6 +54,9 @@ SpellInfo(MANGLEBEAR cd=6)
 SpellInfo(MANGLECAT cd=6)
 SpellInfo(STARFALL cd=90)
 SpellInfo(TIGERSFURY cd=30)
+SpellInfo(BARKSKIN cd=60)
+SpellInfo(SURVIVALINSTINCTS cd=180)
+SpellInfo(FRENZIEDREGENERATION cd=180)
 
 AddIcon help=main
 {
@@ -129,6 +135,16 @@ AddIcon help=aoe
 AddIcon help=offgcd
 {
 	if Stance(1) and SpellKnown(MAUL) and Mana(more 50) Spell(MAUL)
+}
+
+AddIcon help=mitigation
+{
+	if Stance(1) and TargetTargetIsPlayer()
+	{
+		if LifePercent(less 75) and SpellKnown(BARKSKIN) Spell(BARKSKIN usable=1)
+		if LifePercent(less 45) and SpellKnown(SURVIVALINSTINCTS) Spell(SURVIVALINSTINCTS usable=1)
+		if LifePercent(less 30) and SpellKnown(FRENZIEDREGENERATION) Spell(FRENZIEDREGENERATION usable=1)
+	}
 }
 
 AddIcon help=cd

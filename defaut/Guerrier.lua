@@ -27,6 +27,7 @@ Define(OVERPOWER 7384)
 Define(SHIELDBLOCK 2565)
 Define(SHIELDWALL 871)
 Define(LASTSTAND 12975)
+Define(ENRAGEDREGENERATION 55694)
 Define(DEATHWISH 12292)
 Define(RECKLESSNESS 1719)
 Define(BLADESTORM 46924)
@@ -60,6 +61,10 @@ SpellInfo(MORTALSTRIKE cd=6)
 SpellInfo(SWEEPINGSTRIKES cd=30)
 SpellInfo(DEATHWISH cd=180)
 SpellInfo(BLOODRAGE cd=60)
+SpellInfo(SHIELDBLOCK cd=40)
+SpellInfo(LASTSTAND cd=180)
+SpellInfo(SHIELDWALL cd=300)
+SpellInfo(ENRAGEDREGENERATION cd=180)
 SpellInfo(HEROICSTRIKE toggle=1)
 SpellInfo(CLEAVE toggle=1)
 ScoreSpells(WHIRLWIND BLOODTHIRST SLAM REND MORTALSTRIKE EXECUTE SHIELDSLAM REVENGE)
@@ -182,6 +187,17 @@ AddIcon help=offgcd
 			Spell(CLEAVE)
 		if SpellKnown(HEROICSTRIKE) and Mana(more 75)
 			Spell(HEROICSTRIKE)
+	}
+}
+
+AddIcon help=mitigation
+{
+	if Stance(2) and TargetTargetIsPlayer()
+	{
+		if HasShield() and LifePercent(less 75) and SpellKnown(SHIELDBLOCK) Spell(SHIELDBLOCK usable=1)
+		if LifePercent(less 45) and SpellKnown(LASTSTAND) Spell(LASTSTAND usable=1)
+		if LifePercent(less 35) and SpellKnown(SHIELDWALL) Spell(SHIELDWALL usable=1)
+		if LifePercent(less 25) and SpellKnown(ENRAGEDREGENERATION) Spell(ENRAGEDREGENERATION usable=1)
 	}
 }
 

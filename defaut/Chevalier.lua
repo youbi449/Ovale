@@ -29,6 +29,13 @@ Define(BLOODTAP 45529)
 Define(FREEZINGFOG 59052)
 Define(KILLINGMACHINE 51124)
 Define(UNHOLYBLIGHT 49194)
+Define(ANTIMAGICSHELL 48707)
+Define(ICEBOUNDFORTITUDE 48792)
+Define(VAMPIRICBLOOD 55233)
+Define(RUNETAP 48982)
+Define(DEATHPACT 48743)
+Define(BONESHIELD 49222)
+Define(UNBREAKABLEARMOR 51271)
 
 Define(TALENTDEATHSTRIKE 2259)
 Define(TALENTFROSTSTRIKE 1975)
@@ -51,6 +58,14 @@ SpellInfo(HOWLINGBLAST cd=8)
 SpellInfo(OBLITERATE cd=1.5)
 SpellInfo(HEARTSTRIKE cd=1.5)
 SpellInfo(SCOURGESTRIKE cd=1.5)
+SpellInfo(ANTIMAGICSHELL cd=45)
+SpellInfo(ICEBOUNDFORTITUDE cd=120)
+SpellInfo(VAMPIRICBLOOD cd=60)
+SpellInfo(RUNETAP cd=30)
+SpellInfo(DEATHPACT cd=120)
+SpellInfo(BONESHIELD cd=60)
+SpellInfo(UNBREAKABLEARMOR cd=60)
+SpellAddBuff(BONESHIELD BONESHIELD=300)
 
 AddIcon help=main
 {
@@ -113,6 +128,20 @@ AddIcon help=aoe
 AddIcon help=offgcd
 {
 	if SpellKnown(RUNESTRIKE) Spell(RUNESTRIKE usable=1)
+}
+
+AddIcon help=mitigation
+{
+	if BuffPresent(FROSTPRESENCE) and TargetTargetIsPlayer()
+	{
+		if SpellKnown(BONESHIELD) and BuffExpires(BONESHIELD 2) Spell(BONESHIELD usable=1)
+		if LifePercent(less 70) and SpellKnown(ANTIMAGICSHELL) Spell(ANTIMAGICSHELL usable=1)
+		if LifePercent(less 60) and SpellKnown(UNBREAKABLEARMOR) Spell(UNBREAKABLEARMOR usable=1)
+		if LifePercent(less 55) and SpellKnown(RUNETAP) Spell(RUNETAP usable=1)
+		if LifePercent(less 45) and SpellKnown(VAMPIRICBLOOD) Spell(VAMPIRICBLOOD usable=1)
+		if LifePercent(less 35) and SpellKnown(ICEBOUNDFORTITUDE) Spell(ICEBOUNDFORTITUDE usable=1)
+		if LifePercent(less 25) and PetPresent() and SpellKnown(DEATHPACT) Spell(DEATHPACT usable=1)
+	}
 }
 
 AddIcon help=cd
