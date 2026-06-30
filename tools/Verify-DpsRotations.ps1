@@ -159,6 +159,7 @@ Assert-Order "Arms Rend before Mortal Strike" "defaut/Guerrier.lua" "^\s*Spell\(
 Assert-Order "Arms Taste for Blood condition before Overpower" "defaut/Guerrier.lua" "BuffPresent\(TASTEFORBLOOD\)" "Spell\(OVERPOWER usable=1\)" 0 116
 Assert-Order "Arms Taste for Blood Overpower before Mortal Strike" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 116 116
 Assert-Order "Arms Taste for Blood Overpower before Bladestorm" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "Spell\(BLADESTORM\)" 116 116
+Assert-Order "Warrior Cleave is high rage dump" "defaut/Guerrier.lua" "Mana\(more 65\).*Spell\(CLEAVE\)" "Spell\(HEROICSTRIKE\)" 0 180
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
 Assert-Order "Hunter melee fallback before ranged execute" "defaut/Chasseur.lua" "TargetInRange\(RAPTORSTRIKE\)" "Spell\(KILLSHOT\)"
 Assert-Order "Hunter Mongoose before Raptor in melee fallback" "defaut/Chasseur.lua" "Spell\(MONGOOSEBITE usable=1\)" "Spell\(RAPTORSTRIKE\)" 0 75
@@ -191,6 +192,14 @@ $tankMitigationChecks = @(
 foreach ($check in $tankMitigationChecks) {
     foreach ($pattern in $check.Patterns) {
         Assert-Match -File $check.File -Pattern ([regex]::Escape($pattern)) -Message "MISS $($check.Class) tank mitigation: $pattern"
+    }
+}
+
+$cleaveLines = Get-Content -LiteralPath "defaut/Guerrier.lua" |
+    Select-String -Pattern "Spell\(CLEAVE\)"
+foreach ($line in $cleaveLines) {
+    if ($line.Line -notmatch "Mana\(more 65\)") {
+        throw "Warrior Cleave is not high-rage gated at line $($line.LineNumber)"
     }
 }
 

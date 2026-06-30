@@ -156,7 +156,7 @@ AddIcon help=aoe
 		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
 		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
 		if SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
-		if SpellKnown(CLEAVE) Spell(CLEAVE)
+		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
 		if SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
 	}
 	if Stance(1) # Battle
@@ -167,7 +167,7 @@ AddIcon help=aoe
 		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
 		if SpellKnown(BLADESTORM) Spell(BLADESTORM)
 		if SpellKnown(MORTALSTRIKE) Spell(MORTALSTRIKE)
-		if SpellKnown(CLEAVE) Spell(CLEAVE)
+		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
 	}
 }
 
@@ -183,8 +183,7 @@ AddIcon help=offgcd
 	}
 	if CheckBoxOn(multi)
 	{
-		if SpellKnown(CLEAVE) and Mana(more 45)
-			Spell(CLEAVE)
+		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
 		if SpellKnown(HEROICSTRIKE) and Mana(more 75)
 			Spell(HEROICSTRIKE)
 	}
