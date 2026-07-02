@@ -135,9 +135,9 @@ if ($unknownFunctions) {
 }
 
 $coverageChecks = @(
-    @{ Spec = "Warrior Arms"; File = "defaut/Guerrier.lua"; Patterns = @("REND", "TASTEFORBLOOD", "OVERPOWER", "MORTALSTRIKE", "SUDDENDEATH", "SLAMTALENT") },
+    @{ Spec = "Warrior Arms"; File = "defaut/Guerrier.lua"; Patterns = @("REND", "TASTEFORBLOOD", "OVERPOWER", "MORTALSTRIKE", "SUDDENDEATH", "SLAMTALENT", "SHATTERINGTHROW") },
     @{ Spec = "Warrior Fury"; File = "defaut/Guerrier.lua"; Patterns = @("SLAMBUFF", "BLOODTHIRST", "WHIRLWIND", "EXECUTE", "BLOODRAGE") },
-    @{ Spec = "Paladin Retribution"; File = "defaut/Paladin.lua"; Patterns = @("JUDGELIGHT", "JUDGEWISDOM", "CRUSADERSTRIKE", "DIVINESTORM", "THEARTOFWAR", "EXORCISM", "DIVINEPLEA") },
+    @{ Spec = "Paladin Retribution"; File = "defaut/Paladin.lua"; Patterns = @("SEALCOMMAND", "JUDGELIGHT", "JUDGEWISDOM", "CRUSADERSTRIKE", "DIVINESTORM", "THEARTOFWAR", "EXORCISM", "DIVINEPLEA") },
     @{ Spec = "Hunter Beast Mastery"; File = "defaut/Chasseur.lua"; Patterns = @("KILLCOMMAND", "KILLSHOT", "SERPENTSTING", "ARCANESHOT", "STEADYSHOT", "RAPTORSTRIKE", "MONGOOSEBITE", "BESTIALWRATH") },
     @{ Spec = "Hunter Marksmanship"; File = "defaut/Chasseur.lua"; Patterns = @("CHIMERASHOT", "SERPENTSTING", "AIMEDSHOT", "SILENCINGSHOT", "STEADYSHOT", "READINESS") },
     @{ Spec = "Hunter Survival"; File = "defaut/Chasseur.lua"; Patterns = @("EXPLOSIVESHOT", "BLACKARROW", "SERPENTSTING", "AIMEDSHOT", "STEADYSHOT") },
@@ -169,6 +169,7 @@ foreach ($check in $coverageChecks) {
 Assert-Order "Ret Judgement before Crusader Strike" "defaut/Paladin.lua" "List\(jugement lumiere\).*JUDGELIGHT" "Spell\(CRUSADERSTRIKE\)" 70 70
 Assert-Order "Ret Exorcism is Art of War gated" "defaut/Paladin.lua" "BuffPresent\(THEARTOFWAR\).*Spell\(EXORCISM\)" "CheckBoxOn\(coleredivine\)" 70 70
 Assert-Order "Ret Holy Wrath optional" "defaut/Paladin.lua" "AddCheckBox\(coleredivine" "CheckBoxOn\(coleredivine\).*Spell\(HOLYWRATH\)"
+Assert-Order "Ret AoE Seal of Command before Divine Storm" "defaut/Paladin.lua" "Spell\(SEALCOMMAND\)" "Spell\(DIVINESTORM\)" 98 98
 
 $paladinLines = Get-Content -LiteralPath "defaut/Paladin.lua"
 for ($i = 0; $i -lt $paladinLines.Count; $i++) {
@@ -184,6 +185,7 @@ Assert-Order "Arms Taste for Blood Overpower before Mortal Strike" "defaut/Guerr
 Assert-Order "Arms Taste for Blood Overpower before Bladestorm" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "Spell\(BLADESTORM\)" 116 116
 Assert-Order "Warrior Cleave is high rage dump" "defaut/Guerrier.lua" "Mana\(more 65\).*Spell\(CLEAVE\)" "Spell\(HEROICSTRIKE\)" 0 180
 Assert-Order "Warrior AoE Sweeping Strikes before single-target cleaves" "defaut/Guerrier.lua" "Spell\(SWEEPINGSTRIKES\)" "BuffPresent\(SWEEPINGSTRIKES\).*Spell\(OVERPOWER usable=1\)" 140 140
+Assert-Order "Arms Shattering Throw in Battle Stance CD block" "defaut/Guerrier.lua" "Stance\(1\).*# Battle" "Spell\(SHATTERINGTHROW\)" 200 200
 Assert-Order "Ret AoE Divine Storm before Consecration" "defaut/Paladin.lua" "Spell\(DIVINESTORM\)" "Spell\(CONSECRATE\)" 98 98
 Assert-Order "Ret AoE Exorcism after Consecration and gated" "defaut/Paladin.lua" "Spell\(CONSECRATE\)" "BuffPresent\(THEARTOFWAR\).*Spell\(EXORCISM\)" 98 98
 Assert-Order "BM Kill Command before fallback Serpent Sting" "defaut/Chasseur.lua" "Spell\(KILLCOMMAND usable=1\)" "Spell\(SERPENTSTING\)" 88 88
@@ -209,6 +211,7 @@ Assert-Order "Balance Eclipse Starfire buff casts Starfire" "defaut/Druide.lua" 
 Assert-Order "Balance Wrath default filler before generic Starfire" "defaut/Druide.lua" "CheckBoxOn\(wrathfiller\).*Spell\(WRATH\)" "^\s*if SpellKnown\(STARFIRE\) Spell\(STARFIRE\)$" 0 90
 Assert-Order "Elemental Flame Shock before Lava Burst" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(LAVABURST" 73 0
 Assert-Order "Enhancement Flame Shock before Stormstrike" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(STORMSTRIKE\)" 45 45
+Assert-Order "Enhancement Earth Shock before Stormstrike" "defaut/Chaman.lua" "Spell\(EARTHSHOCK\)" "Spell\(STORMSTRIKE\)" 45 45
 Assert-Order "Enhancement Lava Lash before Maelstrom dump" "defaut/Chaman.lua" "Spell\(LAVALASH\)" "MAELSTROMWEAPON stacks=5" 45 45
 Assert-Order "Fire Mage Living Bomb before Hot Streak" "defaut/Mage.lua" "Spell\(LIVINGBOMB" "HOTSTREAK.*Spell\(PYROBLAST"
 Assert-Order "Arcane Barrage optional" "defaut/Mage.lua" "AddCheckBox\(abarr" "CheckBoxOn\(abarr\).*Spell\(ARCANEBARRAGE"

@@ -99,6 +99,7 @@ AddIcon help=aoe
 {
 	if SpellKnown(DIVINESTORM) or SpellKnown(CRUSADERSTRIKE)
 	{
+		if SpellKnown(SEALCOMMAND) and BuffExpires(SEALCOMMAND 400) Spell(SEALCOMMAND)
 		if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
 		if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
 		if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)

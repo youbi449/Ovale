@@ -52,9 +52,9 @@ AddIcon help=main
 
 		if SpellKnown(LIGHTNINGSHIELD) and BuffExpires(LIGHTNINGSHIELD 2) Spell(LIGHTNINGSHIELD)
 		if SpellKnown(FLAMESHOCK) and TargetDebuffExpires(FLAMESHOCK 2 haste=spell mine=1) Spell(FLAMESHOCK)
+		if SpellKnown(EARTHSHOCK) Spell(EARTHSHOCK)
 		if SpellKnown(STORMSTRIKE) Spell(STORMSTRIKE)
 		if SpellKnown(MAGMATOTEM) and TotemExpires(fire) Spell(MAGMATOTEM)
-		if SpellKnown(EARTHSHOCK) Spell(EARTHSHOCK)
 		if CheckBoxOn(firenova) and SpellKnown(FIRENOVA)
 		{
 			unless TotemExpires(fire) Spell(FIRENOVA)
