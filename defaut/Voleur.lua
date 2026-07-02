@@ -20,6 +20,8 @@ Define(KILLINGSPREE 51690)
 Define(BLADEFLURRY 13877)
 Define(COLDBLOOD 14177)
 Define(PREPARATION 14185)
+Define(PREMEDITATION 14183)
+Define(VANISH 1856)
 Define(TRICKSOFTHETRADE 57934)
 Define(CLOAKOFSHADOWS 31224)
 Define(FANOFKNIVES 51723)
@@ -76,18 +78,20 @@ AddIcon help=main
 	if SpellKnown(HEMORRHAGE)
 	{
 		if CheckBoxOn(expose) and ComboPoints(more 3) and SpellKnown(EXPOSEARMOR) and TargetDebuffExpires(EXPOSEARMOR 2) Spell(EXPOSEARMOR)
+		if SpellKnown(PREMEDITATION) Spell(PREMEDITATION usable=1)
 		if ComboPoints(more 0) and BuffExpires(SLICEANDDICE 2) Spell(SLICEANDDICE)
 		if BuffPresent(SHADOWDANCE)
 		{
 			if SpellKnown(GARROTE) and TargetDebuffExpires(GARROTE 0 mine=1) Spell(GARROTE usable=1)
+			if SpellKnown(SHADOWSTEP) Spell(SHADOWSTEP)
 			if ComboPoints(less 5) and SpellKnown(AMBUSH) Spell(AMBUSH usable=1)
 		}
 		if ComboPoints(more 4) and TargetDeadIn(more 10) and TargetDebuffExpires(RUPTURE 0 mine=1)
 		{
-			if SpellKnown(SHADOWSTEP) Spell(SHADOWSTEP)
 			Spell(RUPTURE)
 		}
 		if ComboPoints(more 4) Spell(EVISCERATE)
+		if SpellKnown(BACKSTAB) Spell(BACKSTAB)
 		if SpellKnown(GHOSTLYSTRIKE) Spell(GHOSTLYSTRIKE)
 		Spell(HEMORRHAGE)
 	}
@@ -117,6 +121,7 @@ AddIcon help=cd
 	if SpellKnown(BLADEFLURRY) Spell(BLADEFLURRY)
 	if SpellKnown(ADRENALINERUSH) Spell(ADRENALINERUSH)
 	if SpellKnown(KILLINGSPREE) Spell(KILLINGSPREE)
+	if SpellKnown(VANISH) Spell(VANISH)
 	if SpellKnown(PREPARATION) Spell(PREPARATION)
 }
 

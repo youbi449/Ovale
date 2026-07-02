@@ -29,6 +29,8 @@ Define(ICYVEINS 12472)
 Define(MIRRORIMAGE 55342)
 Define(SUMMONWATERELEMENTAL 31687)
 Define(PRESENCEOFMIND 12043)
+Define(COLDSNAP 11958)
+Define(EVOCATION 12051)
 Define(MAGEARMOR 6117)
 Define(MOLTENARMOR 30482)
 Define(ICEARMOR 7302)
@@ -48,6 +50,8 @@ SpellAddBuff(ARCANEBLAST ARCANEBLAST=6)
 SpellInfo(ARCANEBARRAGE cd=3)
 SpellInfo(LIVINGBOMB cd=1.5)
 SpellInfo(DEEPFREEZE cd=30)
+SpellInfo(COLDSNAP cd=480)
+SpellInfo(EVOCATION cd=240)
 
 AddIcon help=main
 {
@@ -108,5 +112,11 @@ AddIcon help=cd
 	if SpellKnown(ICYVEINS) Spell(ICYVEINS)
 	if SpellKnown(PRESENCEOFMIND) Spell(PRESENCEOFMIND)
 	if SpellKnown(SUMMONWATERELEMENTAL) and PetPresent(no) Spell(SUMMONWATERELEMENTAL)
+	if SpellKnown(COLDSNAP) Spell(COLDSNAP)
+}
+
+AddIcon size=small help=mana
+{
+	if SpellKnown(EVOCATION) and ManaPercent(less 25) Spell(EVOCATION)
 }
 ]]

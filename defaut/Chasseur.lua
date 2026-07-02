@@ -83,6 +83,7 @@ AddIcon help=main
 		if TargetDebuffPresent(SERPENTSTING mine=1) Spell(CHIMERASHOT)
 		if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
 		if CheckBoxOn(arcane) and SpellKnown(ARCANESHOT) Spell(ARCANESHOT)
+		if SpellKnown(SILENCINGSHOT) Spell(SILENCINGSHOT)
 		if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
 	}
 
