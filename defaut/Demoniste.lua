@@ -36,6 +36,9 @@ Define(FIRESTONE 6366)
 Define(SPELLSTONE 2362)
 Define(GLYPHLIFETAP 63320)
 Define(LIFETAP 1454)
+Define(SUMMONIMP 688)
+Define(SUMMONFELHUNTER 691)
+Define(SUMMONFELGUARD 30146)
 Define(SEEDOFCORRUPTION 27243)
 Define(RAINOFFIRE 5740)
 Define(HELLFIRE 1949)
@@ -78,6 +81,7 @@ AddIcon help=main
 
 	if SpellKnown(HAUNT) or SpellKnown(UNSTABLEAFFLICTION)
 	{
+		if PetPresent(no) and SpellKnown(SUMMONFELHUNTER) Spell(SUMMONFELHUNTER)
 		if SpellKnown(HAUNT) and TargetDebuffExpires(HAUNT 1.5 mine=1) Spell(HAUNT)
 		if SpellKnown(UNSTABLEAFFLICTION) and TargetDebuffExpires(UNSTABLEAFFLICTION 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(UNSTABLEAFFLICTION)
 		if SpellKnown(CORRUPTION) and TargetDebuffExpires(CORRUPTION 1 mine=1) and TargetDeadIn(more 9) Spell(CORRUPTION)
@@ -88,6 +92,7 @@ AddIcon help=main
 
 	if SpellKnown(METAMORPHOSIS)
 	{
+		if PetPresent(no) and SpellKnown(SUMMONFELGUARD) Spell(SUMMONFELGUARD)
 		if List(curse doom) and SpellKnown(CURSEDOOM) and TargetDebuffExpires(CURSEDOOM 1 mine=1) and TargetDeadIn(more 60) Spell(CURSEDOOM)
 		if List(curse agony) and SpellKnown(CURSEAGONY) and TargetDebuffExpires(CURSEAGONY 1 mine=1) and TargetDeadIn(more 10) Spell(CURSEAGONY)
 		if SpellKnown(IMMOLATE) and TargetDebuffExpires(IMMOLATE 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(IMMOLATE)
@@ -100,6 +105,7 @@ AddIcon help=main
 
 	if SpellKnown(CHAOSBOLT) or SpellKnown(CONFLAGRATE)
 	{
+		if PetPresent(no) and SpellKnown(SUMMONIMP) Spell(SUMMONIMP)
 		if List(curse doom) and SpellKnown(CURSEDOOM) and TargetDebuffExpires(CURSEDOOM 1 mine=1) and TargetDeadIn(more 60) Spell(CURSEDOOM)
 		if List(curse agony) and SpellKnown(CURSEAGONY) and TargetDebuffExpires(CURSEAGONY 1 mine=1) and TargetDeadIn(more 10) Spell(CURSEAGONY)
 		if SpellKnown(IMMOLATE) and TargetDebuffExpires(IMMOLATE 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(IMMOLATE)

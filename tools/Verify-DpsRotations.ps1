@@ -139,7 +139,7 @@ $coverageChecks = @(
     @{ Spec = "Warrior Fury"; File = "defaut/Guerrier.lua"; Patterns = @("SLAMBUFF", "BLOODTHIRST", "WHIRLWIND", "EXECUTE", "BLOODRAGE") },
     @{ Spec = "Paladin Retribution"; File = "defaut/Paladin.lua"; Patterns = @("SEALCOMMAND", "JUDGELIGHT", "JUDGEWISDOM", "CRUSADERSTRIKE", "DIVINESTORM", "THEARTOFWAR", "EXORCISM", "DIVINEPLEA") },
     @{ Spec = "Hunter Beast Mastery"; File = "defaut/Chasseur.lua"; Patterns = @("KILLCOMMAND", "KILLSHOT", "SERPENTSTING", "ARCANESHOT", "STEADYSHOT", "RAPTORSTRIKE", "MONGOOSEBITE", "BESTIALWRATH") },
-    @{ Spec = "Hunter Marksmanship"; File = "defaut/Chasseur.lua"; Patterns = @("CHIMERASHOT", "SERPENTSTING", "AIMEDSHOT", "SILENCINGSHOT", "STEADYSHOT", "READINESS") },
+    @{ Spec = "Hunter Marksmanship"; File = "defaut/Chasseur.lua"; Patterns = @("CHIMERASHOT", "TRUESHOTAURA", "SERPENTSTING", "AIMEDSHOT", "SILENCINGSHOT", "STEADYSHOT", "READINESS") },
     @{ Spec = "Hunter Survival"; File = "defaut/Chasseur.lua"; Patterns = @("EXPLOSIVESHOT", "BLACKARROW", "SERPENTSTING", "AIMEDSHOT", "STEADYSHOT") },
     @{ Spec = "Rogue Assassination"; File = "defaut/Voleur.lua"; Patterns = @("HUNGERFORBLOOD", "SLICEANDDICE", "RUPTURE", "MUTILATE", "ENVENOM") },
     @{ Spec = "Rogue Combat"; File = "defaut/Voleur.lua"; Patterns = @("SLICEANDDICE", "RUPTURE", "EVISCERATE", "SINISTERSTRIKE", "KILLINGSPREE", "ADRENALINERUSH") },
@@ -154,9 +154,9 @@ $coverageChecks = @(
     @{ Spec = "Mage Arcane"; File = "defaut/Mage.lua"; Patterns = @("ARCANEBLAST", "MISSILEBARRAGE", "ARCANEMISSILES", "ARCANEBARRAGE", "ARCANEPOWER", "EVOCATION") },
     @{ Spec = "Mage Fire"; File = "defaut/Mage.lua"; Patterns = @("LIVINGBOMB", "HOTSTREAK", "PYROBLAST", "SCORCH", "FIREBALL", "EVOCATION") },
     @{ Spec = "Mage Frost"; File = "defaut/Mage.lua"; Patterns = @("DEEPFREEZE", "FINGERFROST", "BRAINFREEZE", "FROSTFIREBOLT", "FROSTBOLT", "COLDSNAP", "EVOCATION") },
-    @{ Spec = "Warlock Affliction"; File = "defaut/Demoniste.lua"; Patterns = @("HAUNT", "UNSTABLEAFFLICTION", "CORRUPTION", "CURSEAGONY", "DRAINSOUL", "SHADOWBOLT", "LIFETAP") },
-    @{ Spec = "Warlock Demonology"; File = "defaut/Demoniste.lua"; Patterns = @("METAMORPHOSIS", "IMMOLATIONAURA", "DECIMATION", "SOULFIRE", "IMMOLATE", "MOLTENCORE", "DEMONICEMPOWERMENT") },
-    @{ Spec = "Warlock Destruction"; File = "defaut/Demoniste.lua"; Patterns = @("IMMOLATE", "CONFLAGRATE", "CHAOSBOLT", "INCINERATE", "CURSEDOOM") },
+    @{ Spec = "Warlock Affliction"; File = "defaut/Demoniste.lua"; Patterns = @("SUMMONFELHUNTER", "HAUNT", "UNSTABLEAFFLICTION", "CORRUPTION", "CURSEAGONY", "DRAINSOUL", "SHADOWBOLT", "LIFETAP") },
+    @{ Spec = "Warlock Demonology"; File = "defaut/Demoniste.lua"; Patterns = @("SUMMONFELGUARD", "METAMORPHOSIS", "IMMOLATIONAURA", "DECIMATION", "SOULFIRE", "IMMOLATE", "MOLTENCORE", "DEMONICEMPOWERMENT") },
+    @{ Spec = "Warlock Destruction"; File = "defaut/Demoniste.lua"; Patterns = @("SUMMONIMP", "IMMOLATE", "CONFLAGRATE", "CHAOSBOLT", "INCINERATE", "CURSEDOOM") },
     @{ Spec = "Priest Shadow"; File = "defaut/Pretre.lua"; Patterns = @("VE", "VT", "DP", "SWP", "SHADOWWEAVING", "MB", "MF", "SWD") }
 )
 
@@ -193,6 +193,7 @@ Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(
 Assert-Order "Hunter melee fallback before ranged execute" "defaut/Chasseur.lua" "TargetInRange\(RAPTORSTRIKE\)" "Spell\(KILLSHOT\)"
 Assert-Order "Hunter Mongoose before Raptor in melee fallback" "defaut/Chasseur.lua" "Spell\(MONGOOSEBITE usable=1\)" "Spell\(RAPTORSTRIKE\)" 0 75
 Assert-Order "Hunter Chimera uses own Serpent Sting" "defaut/Chasseur.lua" "TargetDebuffPresent\(SERPENTSTING mine=1\).*Spell\(CHIMERASHOT\)" "Spell\(AIMEDSHOT\)" 79 79
+Assert-Order "Hunter MM Trueshot Aura before Serpent Sting" "defaut/Chasseur.lua" "Spell\(TRUESHOTAURA\)" "Spell\(SERPENTSTING\)" 79 79
 Assert-Order "Hunter MM Silencing Shot before Steady Shot" "defaut/Chasseur.lua" "Spell\(SILENCINGSHOT\)" "Spell\(STEADYSHOT\)" 79 79
 Assert-Order "Frost DK Rime before Obliterate" "defaut/Chevalier.lua" "FREEZINGFOG.*Spell\(HOWLINGBLAST" "Spell\(OBLITERATE\)"
 Assert-Order "Frost DK Killing Machine before Obliterate" "defaut/Chevalier.lua" "KILLINGMACHINE.*Spell\(FROSTSTRIKE" "Spell\(OBLITERATE\)"
@@ -200,6 +201,9 @@ Assert-Order "Frost DK disease roll before Obliterate" "defaut/Chevalier.lua" "T
 Assert-Order "Blood DK disease roll before Heart Strike" "defaut/Chevalier.lua" "TargetDebuffExpires\(BLOODPLAGUE 4\).*Spell\(PESTILENCE\)" "Spell\(HEARTSTRIKE\)" 103 103
 Assert-Order "Blood DK Heart Strike before Death Strike" "defaut/Chevalier.lua" "Spell\(HEARTSTRIKE\)" "Spell\(DEATHSTRIKE\)" 83 83
 Assert-Order "Unholy DK Scourge Strike before optional DnD" "defaut/Chevalier.lua" "Spell\(SCOURGESTRIKE\)" "CheckBoxOn\(dnd\).*Spell\(DEATHANDECAY"
+Assert-Order "Affliction Warlock Felhunter before Haunt" "defaut/Demoniste.lua" "Spell\(SUMMONFELHUNTER\)" "Spell\(HAUNT\)" 76 76
+Assert-Order "Demo Warlock Felguard before dots" "defaut/Demoniste.lua" "Spell\(SUMMONFELGUARD\)" "Spell\(CURSEDOOM\)" 86 86
+Assert-Order "Destro Warlock Imp before Immolate" "defaut/Demoniste.lua" "Spell\(SUMMONIMP\)" "Spell\(IMMOLATE\)" 106 106
 Assert-Order "Demo Warlock dots before Decimation Soul Fire" "defaut/Demoniste.lua" "Spell\(CORRUPTION" "DECIMATION.*Spell\(SOULFIRE" 86 0
 Assert-Order "Demo Warlock Immolation Aura before Decimation Soul Fire" "defaut/Demoniste.lua" "Spell\(IMMOLATIONAURA" "DECIMATION.*Spell\(SOULFIRE" 86 0
 Assert-Order "Warlock AoE Immolation Aura before Seed" "defaut/Demoniste.lua" "Spell\(IMMOLATIONAURA" "Spell\(SEEDOFCORRUPTION" 118 118
