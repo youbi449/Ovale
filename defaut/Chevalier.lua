@@ -36,6 +36,7 @@ Define(RUNETAP 48982)
 Define(DEATHPACT 48743)
 Define(BONESHIELD 49222)
 Define(UNBREAKABLEARMOR 51271)
+Define(GHOULFRENZY 63560)
 
 Define(TALENTDEATHSTRIKE 2259)
 Define(TALENTFROSTSTRIKE 1975)
@@ -65,6 +66,7 @@ SpellInfo(RUNETAP cd=30)
 SpellInfo(DEATHPACT cd=120)
 SpellInfo(BONESHIELD cd=60)
 SpellInfo(UNBREAKABLEARMOR cd=60)
+SpellInfo(GHOULFRENZY cd=10)
 SpellAddBuff(BONESHIELD BONESHIELD=300)
 
 AddIcon help=main
@@ -86,6 +88,7 @@ AddIcon help=main
 
 	if SpellKnown(SCOURGESTRIKE) or SpellKnown(SUMMONGARGOYLE)
 	{
+		if SpellKnown(BONESHIELD) and BuffExpires(BONESHIELD 2) Spell(BONESHIELD usable=1)
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
 		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) and { TargetDebuffExpires(BLOODPLAGUE 4) or TargetDebuffExpires(FROSTFEVER 4) } Spell(PESTILENCE)
@@ -93,6 +96,7 @@ AddIcon help=main
 		if SpellKnown(SCOURGESTRIKE) Spell(SCOURGESTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
+		if PetPresent() and SpellKnown(GHOULFRENZY) Spell(GHOULFRENZY usable=1 priority=2)
 		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
 	}
 
@@ -117,12 +121,27 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
-	if SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
-	if SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
-	if SpellKnown(PESTILENCE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE usable=1)
-	if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
-	if SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
-	if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
+	if SpellKnown(HEARTSTRIKE) or TalentPoints(TALENTHEARTSTRIKE more 0)
+	{
+		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
+		if SpellKnown(HEARTSTRIKE) Spell(HEARTSTRIKE)
+		if SpellKnown(PESTILENCE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE usable=1)
+		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
+	}
+	if SpellKnown(HOWLINGBLAST) or SpellKnown(FROSTSTRIKE)
+	{
+		if BuffPresent(FREEZINGFOG) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
+		if BuffPresent(KILLINGMACHINE) and SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
+		if SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
+		if SpellKnown(OBLITERATE) Spell(OBLITERATE)
+	}
+	if SpellKnown(SCOURGESTRIKE) or SpellKnown(SUMMONGARGOYLE)
+	{
+		if SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
+		if SpellKnown(PESTILENCE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) Spell(PESTILENCE usable=1)
+		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
+		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
+	}
 }
 
 AddIcon help=offgcd

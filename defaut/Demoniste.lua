@@ -124,8 +124,6 @@ AddIcon help=aoe
 	if SpellKnown(HELLFIRE) Spell(HELLFIRE)
 	if SpellKnown(CORRUPTION) and TargetDebuffExpires(CORRUPTION 1 mine=1) and TargetDeadIn(more 9) Spell(CORRUPTION)
 	if SpellKnown(IMMOLATE) and TargetDebuffExpires(IMMOLATE 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(IMMOLATE)
-	if SpellKnown(INCINERATE) Spell(INCINERATE)
-	if SpellKnown(SHADOWBOLT) Spell(SHADOWBOLT)
 }
 
 AddIcon help=cd

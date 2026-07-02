@@ -90,15 +90,16 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
+	if SpellKnown(FIREELEMENTALTOTEM) and TotemExpires(fire) Spell(FIREELEMENTALTOTEM)
 	if SpellKnown(MAGMATOTEM) and TotemExpires(fire) Spell(MAGMATOTEM)
 	if SpellKnown(FIRENOVA)
 	{
 		unless TotemExpires(fire) Spell(FIRENOVA)
 	}
+	if CheckBoxOn(thunderstorm) and SpellKnown(THUNDERSTORM) Spell(THUNDERSTORM)
 	if BuffPresent(MAELSTROMWEAPON stacks=5)
 	{
 		if SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
-		if SpellKnown(LIGHTNINGBOLT) Spell(LIGHTNINGBOLT)
 	}
 	if SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
 	if SpellKnown(FLAMESHOCK) and TargetDebuffExpires(FLAMESHOCK 0 mine=1) Spell(FLAMESHOCK)
@@ -109,7 +110,6 @@ AddIcon help=aoe
 	if SpellKnown(STORMSTRIKE) Spell(STORMSTRIKE)
 	if SpellKnown(EARTHSHOCK) Spell(EARTHSHOCK)
 	if SpellKnown(LAVALASH) Spell(LAVALASH)
-	if SpellKnown(LIGHTNINGBOLT) Spell(LIGHTNINGBOLT)
 }
 
 AddIcon help=cd

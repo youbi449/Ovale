@@ -115,20 +115,13 @@ AddIcon help=aoe
 	}
 	if Stance(3)
 	{
-		if SpellKnown(MANGLECAT) Spell(MANGLECAT)
-		if SpellKnown(RAKE) and TargetDebuffExpires(RAKE 0 mine=1) and TargetDeadIn(more 9) Spell(RAKE)
 		if SpellKnown(SWIPE) Spell(SWIPE)
-		if SpellKnown(CLAW) Spell(CLAW)
 	}
 	unless Stance(1) or Stance(3)
 	{
 		if SpellKnown(STARFALL) Spell(STARFALL)
 		if SpellKnown(TYPHOON) Spell(TYPHOON)
 		if SpellKnown(HURRICANE) Spell(HURRICANE)
-		if SpellKnown(INSECTSWARM) and TargetDebuffExpires(INSECTSWARM 0 mine=1) and TargetDeadIn(more 12) Spell(INSECTSWARM)
-		if CheckBoxOn(moonfire) and SpellKnown(MOONFIRE) and TargetDebuffExpires(MOONFIRE 0 mine=1) and TargetDeadIn(more 12) Spell(MOONFIRE)
-		if SpellKnown(STARFIRE) Spell(STARFIRE)
-		if SpellKnown(WRATH) Spell(WRATH)
 	}
 }
 

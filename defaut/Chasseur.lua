@@ -86,27 +86,29 @@ AddIcon help=main
 		if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
 	}
 
-	if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
-	if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
-	if CheckBoxOn(multi) and SpellKnown(MULTISHOT) Spell(MULTISHOT)
-	if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
-	if SpellKnown(ARCANESHOT) Spell(ARCANESHOT)
-	if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
+	unless SpellKnown(EXPLOSIVESHOT) or SpellKnown(CHIMERASHOT)
+	{
+		if SpellKnown(KILLCOMMAND) Spell(KILLCOMMAND usable=1)
+		if CheckBoxOn(trapweave) and SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
+		if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
+		if CheckBoxOn(multi) and SpellKnown(MULTISHOT) Spell(MULTISHOT)
+		if SpellKnown(AIMEDSHOT) Spell(AIMEDSHOT)
+		if SpellKnown(ARCANESHOT) Spell(ARCANESHOT)
+		if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
+	}
 }
 
 AddIcon help=aoe
 {
+	if SpellKnown(VOLLEY) Spell(VOLLEY)
 	if SpellKnown(EXPLOSIVETRAP) Spell(EXPLOSIVETRAP)
 	if SpellKnown(RAPTORSTRIKE) and TargetInRange(RAPTORSTRIKE)
 	{
 		if SpellKnown(MONGOOSEBITE) Spell(MONGOOSEBITE usable=1)
 		Spell(RAPTORSTRIKE)
 	}
-	if SpellKnown(VOLLEY) Spell(VOLLEY)
 	if SpellKnown(MULTISHOT) Spell(MULTISHOT)
-	if SpellKnown(EXPLOSIVESHOT) Spell(EXPLOSIVESHOT)
 	if SpellKnown(SERPENTSTING) and TargetDebuffExpires(SERPENTSTING 0 mine=1) and TargetDeadIn(more 8) Spell(SERPENTSTING)
-	if SpellKnown(STEADYSHOT) Spell(STEADYSHOT)
 }
 
 AddIcon help=cd

@@ -53,6 +53,28 @@ function Assert-Order {
     }
 }
 
+function Get-IconBlockLines {
+    param(
+        [string]$File,
+        [string]$Help
+    )
+
+    $lines = Get-Content -LiteralPath $File
+    $start = ($lines | Select-String -Pattern "AddIcon help=$Help" | Select-Object -First 1).LineNumber
+    if (-not $start) {
+        throw "MISS AddIcon help=$Help in $File"
+    }
+
+    $next = ($lines | Select-String -Pattern "AddIcon " |
+        Where-Object { $_.LineNumber -gt $start } |
+        Select-Object -First 1).LineNumber
+    if (-not $next) {
+        $next = $lines.Count + 1
+    }
+
+    return $lines[($start - 1)..($next - 2)]
+}
+
 [xml](Get-Content -Path "embeds.xml" -Raw) | Out-Null
 [xml](Get-Content -Path "OvaleIcone.xml" -Raw) | Out-Null
 
@@ -124,7 +146,7 @@ $coverageChecks = @(
     @{ Spec = "Rogue Subtlety"; File = "defaut/Voleur.lua"; Patterns = @("HEMORRHAGE", "SHADOWSTEP", "SHADOWDANCE", "AMBUSH", "EVISCERATE") },
     @{ Spec = "Death Knight Blood"; File = "defaut/Chevalier.lua"; Patterns = @("HEARTSTRIKE", "DEATHSTRIKE", "DEATHCOIL", "FROSTFEVER", "BLOODPLAGUE") },
     @{ Spec = "Death Knight Frost"; File = "defaut/Chevalier.lua"; Patterns = @("FREEZINGFOG", "HOWLINGBLAST", "OBLITERATE", "FROSTSTRIKE", "BLOODSTRIKE", "FROSTFEVER", "BLOODPLAGUE") },
-    @{ Spec = "Death Knight Unholy"; File = "defaut/Chevalier.lua"; Patterns = @("SCOURGESTRIKE", "DEATHANDECAY", "BLOODBOIL", "DEATHCOIL", "SUMMONGARGOYLE") },
+    @{ Spec = "Death Knight Unholy"; File = "defaut/Chevalier.lua"; Patterns = @("BONESHIELD", "SCOURGESTRIKE", "DEATHANDECAY", "BLOODBOIL", "DEATHCOIL", "GHOULFRENZY", "SUMMONGARGOYLE") },
     @{ Spec = "Druid Feral Cat"; File = "defaut/Druide.lua"; Patterns = @("SAVAGEROAR", "MANGLECAT", "RAKE", "RIP", "SHRED", "FEROCIOUSBITE") },
     @{ Spec = "Druid Balance"; File = "defaut/Druide.lua"; Patterns = @("INSECTSWARM", "MOONFIRE", "ECLIPSEWRATH", "ECLIPSESTARFIRE", "STARFALL", "FORCEOFNATURE") },
     @{ Spec = "Shaman Enhancement"; File = "defaut/Chaman.lua"; Patterns = @("STORMSTRIKE", "MAELSTROMWEAPON", "LAVALASH", "EARTHSHOCK", "MAGMATOTEM", "FERALSPIRIT") },
@@ -154,13 +176,17 @@ for ($i = 0; $i -lt $paladinLines.Count; $i++) {
         throw "FAIL Ret Exorcism gate: line $($i + 1) can cast Exorcism without The Art of War"
     }
 }
-Assert-Order "Fury Bloodsurge Slam before Bloodthirst" "defaut/Guerrier.lua" "BuffPresent\(SLAMBUFF\)" "^\s*if SpellKnown\(BLOODTHIRST\) Spell\(BLOODTHIRST\)$" 0 96
+Assert-Order "Fury Bloodthirst before Bloodsurge Slam" "defaut/Guerrier.lua" "^\s*if SpellKnown\(BLOODTHIRST\) Spell\(BLOODTHIRST\)$" "BuffPresent\(SLAMBUFF\)" 96 96
+Assert-Order "Fury Whirlwind before Bloodsurge Slam" "defaut/Guerrier.lua" "WHIRLWIND\) Spell\(WHIRLWIND\)" "BuffPresent\(SLAMBUFF\)" 96 96
 Assert-Order "Arms Rend before Mortal Strike" "defaut/Guerrier.lua" "^\s*Spell\(REND\)$" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 0 116
 Assert-Order "Arms Taste for Blood condition before Overpower" "defaut/Guerrier.lua" "BuffPresent\(TASTEFORBLOOD\)" "Spell\(OVERPOWER usable=1\)" 0 116
 Assert-Order "Arms Taste for Blood Overpower before Mortal Strike" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "MORTALSTRIKE\).*TargetLifePercent\(more 20\)" 116 116
 Assert-Order "Arms Taste for Blood Overpower before Bladestorm" "defaut/Guerrier.lua" "Spell\(OVERPOWER usable=1\)" "Spell\(BLADESTORM\)" 116 116
 Assert-Order "Warrior Cleave is high rage dump" "defaut/Guerrier.lua" "Mana\(more 65\).*Spell\(CLEAVE\)" "Spell\(HEROICSTRIKE\)" 0 180
 Assert-Order "Warrior AoE Sweeping Strikes before single-target cleaves" "defaut/Guerrier.lua" "Spell\(SWEEPINGSTRIKES\)" "BuffPresent\(SWEEPINGSTRIKES\).*Spell\(OVERPOWER usable=1\)" 140 140
+Assert-Order "Ret AoE Divine Storm before Consecration" "defaut/Paladin.lua" "Spell\(DIVINESTORM\)" "Spell\(CONSECRATE\)" 98 98
+Assert-Order "Ret AoE Exorcism after Consecration and gated" "defaut/Paladin.lua" "Spell\(CONSECRATE\)" "BuffPresent\(THEARTOFWAR\).*Spell\(EXORCISM\)" 98 98
+Assert-Order "BM Kill Command before fallback Serpent Sting" "defaut/Chasseur.lua" "Spell\(KILLCOMMAND usable=1\)" "Spell\(SERPENTSTING\)" 88 88
 Assert-Order "Hunter trap weaving optional" "defaut/Chasseur.lua" "AddCheckBox\(trapweave" "CheckBoxOn\(trapweave\).*Spell\(EXPLOSIVETRAP"
 Assert-Order "Hunter melee fallback before ranged execute" "defaut/Chasseur.lua" "TargetInRange\(RAPTORSTRIKE\)" "Spell\(KILLSHOT\)"
 Assert-Order "Hunter Mongoose before Raptor in melee fallback" "defaut/Chasseur.lua" "Spell\(MONGOOSEBITE usable=1\)" "Spell\(RAPTORSTRIKE\)" 0 75
@@ -220,6 +246,26 @@ for ($i = 0; $i -lt $warriorAoeLines.Count; $i++) {
     }
 }
 
+$aoeForbiddenSpells = @(
+    @{ File = "defaut/Druide.lua"; Help = "aoe"; Spells = @("MANGLECAT", "RAKE", "CLAW", "INSECTSWARM", "MOONFIRE", "STARFIRE", "WRATH") },
+    @{ File = "defaut/Chasseur.lua"; Help = "aoe"; Spells = @("EXPLOSIVESHOT", "STEADYSHOT") },
+    @{ File = "defaut/Mage.lua"; Help = "aoe"; Spells = @("ARCANEBLAST", "FROSTBOLT", "FIREBALL") },
+    @{ File = "defaut/Pretre.lua"; Help = "aoe"; Spells = @("MF", "HOLYFIRE", "SMITE") },
+    @{ File = "defaut/Voleur.lua"; Help = "aoe"; Spells = @("MUTILATE", "SINISTERSTRIKE", "HEMORRHAGE") },
+    @{ File = "defaut/Demoniste.lua"; Help = "aoe"; Spells = @("INCINERATE", "SHADOWBOLT") },
+    @{ File = "defaut/Chaman.lua"; Help = "aoe"; Spells = @("LIGHTNINGBOLT") }
+)
+foreach ($check in $aoeForbiddenSpells) {
+    $blockLines = Get-IconBlockLines -File $check.File -Help $check.Help
+    for ($i = 0; $i -lt $blockLines.Count; $i++) {
+        foreach ($spell in $check.Spells) {
+            if ($blockLines[$i] -match "Spell\($spell") {
+                throw "$($check.File) AoE should not propose $spell at block line $($i + 1)"
+            }
+        }
+    }
+}
+
 $shadowPainLines = Get-Content -LiteralPath "defaut/Pretre.lua" |
     Select-String -Pattern "Spell\(SWP\)" |
     Where-Object { $_.Line -notmatch "AddIcon size=small" }
@@ -244,13 +290,6 @@ foreach ($line in $holyWrathLines) {
     if ($line.Line -notmatch "CheckBoxOn\(coleredivine\)") {
         throw "Holy Wrath is not option-gated at line $($line.LineNumber)"
     }
-}
-
-$hunterMainKillCommandLines = Get-Content -LiteralPath "defaut/Chasseur.lua" |
-    Select-String -Pattern "Spell\(KILLCOMMAND" |
-    Where-Object { $_.LineNumber -lt 98 }
-if ($hunterMainKillCommandLines) {
-    throw "Kill Command should stay in the Hunter CD icon, not main rotation"
 }
 
 if (-not $SkipLuaParse) {
@@ -291,4 +330,4 @@ console.log(`OK: parsed ${files.length} Lua files with luaparse after BOM normal
     $script | node
 }
 
-Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, 26 priority rules, 4 tank mitigation icons verified"
+Write-Host "OK: XML, TOC, function allow-list, $($coverageChecks.Count) DPS specs, priority/guide-alignment rules, 4 tank mitigation icons verified"

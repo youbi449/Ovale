@@ -78,10 +78,10 @@ AddIcon help=main
 	{
 		if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
 		if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
-		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
 		if SpellKnown(CRUSADERSTRIKE) Spell(CRUSADERSTRIKE)
 		if CheckBoxOn(reckoning) and SpellKnown(HANDOFRECKONING) Spell(HANDOFRECKONING usable=1)
 		if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
+		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
 		if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
 		if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
 		if CheckBoxOn(coleredivine) and SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
@@ -97,16 +97,22 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
-	if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
-	if SpellKnown(HAMMEROFTHERIGHTEOUS) Spell(HAMMEROFTHERIGHTEOUS)
-	if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
-	if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
-	if List(jugement lumiere) and SpellKnown(JUDGELIGHT) Spell(JUDGELIGHT)
-	if List(jugement sagesse) and SpellKnown(JUDGEWISDOM) Spell(JUDGEWISDOM)
-	if CheckBoxOn(coleredivine) and SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
-	if HasShield() and SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
-	if HasShield() and SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
-	if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
+	if SpellKnown(DIVINESTORM) or SpellKnown(CRUSADERSTRIKE)
+	{
+		if SpellKnown(DIVINESTORM) Spell(DIVINESTORM)
+		if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
+		if BuffPresent(THEARTOFWAR) and SpellKnown(EXORCISM) Spell(EXORCISM)
+		if SpellKnown(HAMMEROFWRATH) and TargetLifePercent(less 20) Spell(HAMMEROFWRATH usable=1)
+		if CheckBoxOn(coleredivine) and SpellKnown(HOLYWRATH) Spell(HOLYWRATH)
+	}
+	if HasShield()
+	{
+		if SpellKnown(HAMMEROFTHERIGHTEOUS) Spell(HAMMEROFTHERIGHTEOUS)
+		if CheckBoxOn(consecration) and SpellKnown(CONSECRATE) Spell(CONSECRATE)
+		if SpellKnown(AVENGERSSHIELD) Spell(AVENGERSSHIELD)
+		if SpellKnown(SHIELDOFRIGHTEOUSNESS) Spell(SHIELDOFRIGHTEOUSNESS)
+		if SpellKnown(HOLYSHIELD) Spell(HOLYSHIELD)
+	}
 }
 
 AddIcon help=mitigation

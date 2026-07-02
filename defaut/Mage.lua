@@ -35,6 +35,9 @@ Define(ICEARMOR 7302)
 Define(ARCANEEXPLOSION 1449)
 Define(BLIZZARD 10)
 Define(FLAMESTRIKE 2120)
+Define(CONEOFCOLD 120)
+Define(BLASTWAVE 11113)
+Define(DRAGONSBREATH 31661)
 
 AddCheckBox(scorchdebuff SpellName(SCORCH) talent=TALENTIMPROVEDSCORSH)
 AddCheckBox(abarr SpellName(ARCANEBARRAGE) talent=TALENTARCANEBARRAGE)
@@ -90,11 +93,11 @@ AddIcon help=aoe
 {
 	if SpellKnown(LIVINGBOMB) and TargetDebuffExpires(LIVINGBOMB 0 mine=1) and TargetDeadIn(more 12) Spell(LIVINGBOMB)
 	if SpellKnown(FLAMESTRIKE) Spell(FLAMESTRIKE)
+	if SpellKnown(BLASTWAVE) Spell(BLASTWAVE)
+	if SpellKnown(DRAGONSBREATH) Spell(DRAGONSBREATH)
 	if SpellKnown(BLIZZARD) Spell(BLIZZARD)
 	if SpellKnown(ARCANEEXPLOSION) Spell(ARCANEEXPLOSION)
-	if SpellKnown(ARCANEBLAST) Spell(ARCANEBLAST)
-	if SpellKnown(FROSTBOLT) Spell(FROSTBOLT)
-	if SpellKnown(FIREBALL) Spell(FIREBALL)
+	if SpellKnown(CONEOFCOLD) Spell(CONEOFCOLD)
 }
 
 AddIcon help=cd

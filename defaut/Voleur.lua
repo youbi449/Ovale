@@ -108,9 +108,6 @@ AddIcon help=aoe
 		if SpellKnown(ENVENOM) Spell(ENVENOM)
 		Spell(EVISCERATE)
 	}
-	if SpellKnown(MUTILATE) Spell(MUTILATE)
-	if SpellKnown(SINISTERSTRIKE) Spell(SINISTERSTRIKE)
-	if SpellKnown(HEMORRHAGE) Spell(HEMORRHAGE)
 }
 
 AddIcon help=cd
