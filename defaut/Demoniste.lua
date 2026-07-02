@@ -21,6 +21,7 @@ Define(DRAINSOUL 47855)
 Define(SHADOWEMBRACE 32391)
 Define(TALENTSHADOWEMBRACE 1763)
 Define(METAMORPHOSIS 47241)
+Define(IMMOLATIONAURA 50589)
 Define(TALENTDECIMATION 2261)
 Define(SOULSHARD 6265)
 Define(DEMONICEMPOWERMENT 47193)
@@ -55,9 +56,11 @@ SpellAddTargetDebuff(UNSTABLEAFFLICTION UNSTABLEAFFLICTION=15)
 SpellAddTargetDebuff(CORRUPTION CORRUPTION=18)
 SpellAddTargetDebuff(IMMOLATE IMMOLATE=15)
 SpellAddBuff(LIFETAP LIFETAP=40)
+SpellAddBuff(METAMORPHOSIS METAMORPHOSIS=30)
 SpellInfo(CHAOSBOLT cd=12)
 SpellInfo(CONFLAGRATE cd=10)
 SpellInfo(HAUNT cd=8)
+SpellInfo(IMMOLATIONAURA cd=30)
 
 AddIcon help=main
 {
@@ -89,6 +92,7 @@ AddIcon help=main
 		if List(curse agony) and SpellKnown(CURSEAGONY) and TargetDebuffExpires(CURSEAGONY 1 mine=1) and TargetDeadIn(more 10) Spell(CURSEAGONY)
 		if SpellKnown(IMMOLATE) and TargetDebuffExpires(IMMOLATE 1.5 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(IMMOLATE)
 		if SpellKnown(CORRUPTION) and TargetDebuffExpires(CORRUPTION 1 mine=1) and TargetDeadIn(more 9) Spell(CORRUPTION)
+		if BuffPresent(METAMORPHOSIS) and SpellKnown(IMMOLATIONAURA) Spell(IMMOLATIONAURA usable=1)
 		if BuffPresent(DECIMATION) and SpellKnown(SOULFIRE) Spell(SOULFIRE)
 		if BuffPresent(MOLTENCORE) and SpellKnown(INCINERATE) Spell(INCINERATE)
 		if SpellKnown(SHADOWBOLT) Spell(SHADOWBOLT)
@@ -117,9 +121,10 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
+	if BuffPresent(METAMORPHOSIS) and SpellKnown(IMMOLATIONAURA) Spell(IMMOLATIONAURA usable=1)
+	if SpellKnown(SHADOWFLAME) Spell(SHADOWFLAME)
 	if SpellKnown(SEEDOFCORRUPTION) Spell(SEEDOFCORRUPTION)
 	if SpellKnown(SHADOWFURY) Spell(SHADOWFURY)
-	if SpellKnown(SHADOWFLAME) Spell(SHADOWFLAME)
 	if SpellKnown(RAINOFFIRE) Spell(RAINOFFIRE)
 	if SpellKnown(HELLFIRE) Spell(HELLFIRE)
 	if SpellKnown(CORRUPTION) and TargetDebuffExpires(CORRUPTION 1 mine=1) and TargetDeadIn(more 9) Spell(CORRUPTION)

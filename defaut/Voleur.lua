@@ -100,9 +100,9 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
-	if SpellKnown(FANOFKNIVES) Spell(FANOFKNIVES)
-	if SpellKnown(BLADEFLURRY) Spell(BLADEFLURRY)
 	if ComboPoints(more 0) and BuffExpires(SLICEANDDICE 2) Spell(SLICEANDDICE)
+	if SpellKnown(BLADEFLURRY) Spell(BLADEFLURRY)
+	if SpellKnown(FANOFKNIVES) Spell(FANOFKNIVES)
 	if ComboPoints(more 4)
 	{
 		if SpellKnown(ENVENOM) Spell(ENVENOM)

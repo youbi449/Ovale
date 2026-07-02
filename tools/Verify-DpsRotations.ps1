@@ -155,9 +155,9 @@ $coverageChecks = @(
     @{ Spec = "Mage Fire"; File = "defaut/Mage.lua"; Patterns = @("LIVINGBOMB", "HOTSTREAK", "PYROBLAST", "SCORCH", "FIREBALL") },
     @{ Spec = "Mage Frost"; File = "defaut/Mage.lua"; Patterns = @("DEEPFREEZE", "FINGERFROST", "BRAINFREEZE", "FROSTFIREBOLT", "FROSTBOLT") },
     @{ Spec = "Warlock Affliction"; File = "defaut/Demoniste.lua"; Patterns = @("HAUNT", "UNSTABLEAFFLICTION", "CORRUPTION", "CURSEAGONY", "DRAINSOUL", "SHADOWBOLT", "LIFETAP") },
-    @{ Spec = "Warlock Demonology"; File = "defaut/Demoniste.lua"; Patterns = @("METAMORPHOSIS", "DECIMATION", "SOULFIRE", "IMMOLATE", "MOLTENCORE", "DEMONICEMPOWERMENT") },
+    @{ Spec = "Warlock Demonology"; File = "defaut/Demoniste.lua"; Patterns = @("METAMORPHOSIS", "IMMOLATIONAURA", "DECIMATION", "SOULFIRE", "IMMOLATE", "MOLTENCORE", "DEMONICEMPOWERMENT") },
     @{ Spec = "Warlock Destruction"; File = "defaut/Demoniste.lua"; Patterns = @("IMMOLATE", "CONFLAGRATE", "CHAOSBOLT", "INCINERATE", "CURSEDOOM") },
-    @{ Spec = "Priest Shadow"; File = "defaut/Pretre.lua"; Patterns = @("VT", "DP", "SWP", "SHADOWWEAVING", "MB", "MF", "SWD") }
+    @{ Spec = "Priest Shadow"; File = "defaut/Pretre.lua"; Patterns = @("VE", "VT", "DP", "SWP", "SHADOWWEAVING", "MB", "MF", "SWD") }
 )
 
 foreach ($check in $coverageChecks) {
@@ -198,6 +198,9 @@ Assert-Order "Blood DK disease roll before Heart Strike" "defaut/Chevalier.lua" 
 Assert-Order "Blood DK Heart Strike before Death Strike" "defaut/Chevalier.lua" "Spell\(HEARTSTRIKE\)" "Spell\(DEATHSTRIKE\)" 83 83
 Assert-Order "Unholy DK Scourge Strike before optional DnD" "defaut/Chevalier.lua" "Spell\(SCOURGESTRIKE\)" "CheckBoxOn\(dnd\).*Spell\(DEATHANDECAY"
 Assert-Order "Demo Warlock dots before Decimation Soul Fire" "defaut/Demoniste.lua" "Spell\(CORRUPTION" "DECIMATION.*Spell\(SOULFIRE" 86 0
+Assert-Order "Demo Warlock Immolation Aura before Decimation Soul Fire" "defaut/Demoniste.lua" "Spell\(IMMOLATIONAURA" "DECIMATION.*Spell\(SOULFIRE" 86 0
+Assert-Order "Warlock AoE Immolation Aura before Seed" "defaut/Demoniste.lua" "Spell\(IMMOLATIONAURA" "Spell\(SEEDOFCORRUPTION" 118 118
+Assert-Order "Warlock AoE Shadowflame before Seed" "defaut/Demoniste.lua" "Spell\(SHADOWFLAME" "Spell\(SEEDOFCORRUPTION" 118 118
 Assert-Order "Destro Warlock Immolate before Conflagrate" "defaut/Demoniste.lua" "Spell\(IMMOLATE" "Spell\(CONFLAGRATE" 96 0
 Assert-Order "Feral Rake before Rip" "defaut/Druide.lua" "Spell\(RAKE" "Spell\(RIP priority=4\)"
 Assert-Order "Balance Moonfire enabled by default" "defaut/Druide.lua" "AddCheckBox\(moonfire SpellName\(MOONFIRE\) checked\)" "CheckBoxOn\(moonfire\).*Spell\(MOONFIRE"
@@ -207,9 +210,13 @@ Assert-Order "Elemental Flame Shock before Lava Burst" "defaut/Chaman.lua" "Spel
 Assert-Order "Fire Mage Living Bomb before Hot Streak" "defaut/Mage.lua" "Spell\(LIVINGBOMB" "HOTSTREAK.*Spell\(PYROBLAST"
 Assert-Order "Arcane Barrage optional" "defaut/Mage.lua" "AddCheckBox\(abarr" "CheckBoxOn\(abarr\).*Spell\(ARCANEBARRAGE"
 Assert-Order "Shadow SWP after Shadow Weaving before SWD" "defaut/Pretre.lua" "SHADOWWEAVING.*Spell\(SWP" "Spell\(SWD priority=2\)"
+Assert-Order "Shadow Vampiric Embrace kept before dots" "defaut/Pretre.lua" "Spell\(VE\)" "Spell\(VT\)" 43 43
+Assert-Order "Shadow AoE long-lived dots before Mind Sear" "defaut/Pretre.lua" "Spell\(VT\)" "Spell\(MINDSEAR\)" 62 62
 Assert-Order "Shadow Word Death optional" "defaut/Pretre.lua" "AddCheckBox\(swd" "CheckBoxOn\(swd\).*Spell\(SWD priority=2\)"
 Assert-Order "Sub Rogue Ambush before Hemorrhage" "defaut/Voleur.lua" "Spell\(AMBUSH" "^\s*Spell\(HEMORRHAGE\)$"
 Assert-Order "Assassination Hunger for Blood before Envenom" "defaut/Voleur.lua" "Spell\(HUNGERFORBLOOD\)" "Spell\(ENVENOM\)"
+Assert-Order "Rogue AoE Slice and Dice before Fan of Knives" "defaut/Voleur.lua" "Spell\(SLICEANDDICE\)" "Spell\(FANOFKNIVES\)" 101 101
+Assert-Order "Rogue AoE Blade Flurry before Fan of Knives" "defaut/Voleur.lua" "Spell\(BLADEFLURRY\)" "Spell\(FANOFKNIVES\)" 101 101
 
 $tankMitigationChecks = @(
     @{ Class = "Warrior"; File = "defaut/Guerrier.lua"; Patterns = @("AddIcon help=mitigation", "SpellKnown(SHIELDSLAM) or SpellKnown(DEVASTATE) or SpellKnown(LASTSTAND)", "TargetTargetIsPlayer", "LifePercent(less 75)", "SHIELDBLOCK", "LifePercent(less 45)", "LASTSTAND", "LifePercent(less 35)", "SHIELDWALL", "LifePercent(less 25)", "ENRAGEDREGENERATION") },

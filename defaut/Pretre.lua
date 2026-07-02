@@ -42,6 +42,7 @@ AddIcon help=main
 
 	if SpellKnown(VT) or SpellKnown(MF)
 	{
+		if SpellKnown(VE) and BuffExpires(VE 2) Spell(VE)
 		if SpellKnown(VT) and TargetDebuffExpires(VT 1.4 mine=1 haste=spell) and TargetDeadIn(more 8) Spell(VT)
 		if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
 		if CheckBoxOff(swpweaving) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
@@ -61,12 +62,12 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
-	if SpellKnown(MINDSEAR) Spell(MINDSEAR)
-	if SpellKnown(HOLYNOVA) Spell(HOLYNOVA)
 	if SpellKnown(VT) and TargetDebuffExpires(VT 1.4 mine=1 haste=spell) and TargetDeadIn(more 24) Spell(VT)
 	if SpellKnown(DP) and TargetDebuffExpires(DP 1 mine=1) and TargetDeadIn(more 8) Spell(DP)
 	if CheckBoxOff(swpweaving) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
 	if CheckBoxOn(swpweaving) and BuffPresent(SHADOWWEAVING stacks=5) and SpellKnown(SWP) and TargetDebuffExpires(SWP 1 mine=1) and TargetDeadIn(more 8) Spell(SWP)
+	if SpellKnown(MINDSEAR) Spell(MINDSEAR)
+	if SpellKnown(HOLYNOVA) Spell(HOLYNOVA)
 }
 
 AddIcon help=cd
