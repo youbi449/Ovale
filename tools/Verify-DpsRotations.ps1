@@ -194,12 +194,13 @@ Assert-Order "Hunter Chimera uses own Serpent Sting" "defaut/Chasseur.lua" "Targ
 Assert-Order "Frost DK Rime before Obliterate" "defaut/Chevalier.lua" "FREEZINGFOG.*Spell\(HOWLINGBLAST" "Spell\(OBLITERATE\)"
 Assert-Order "Frost DK Killing Machine before Obliterate" "defaut/Chevalier.lua" "KILLINGMACHINE.*Spell\(FROSTSTRIKE" "Spell\(OBLITERATE\)"
 Assert-Order "Frost DK disease roll before Obliterate" "defaut/Chevalier.lua" "TargetDebuffExpires\(BLOODPLAGUE 4\).*Spell\(PESTILENCE\)" "Spell\(OBLITERATE\)"
+Assert-Order "Blood DK disease roll before Heart Strike" "defaut/Chevalier.lua" "TargetDebuffExpires\(BLOODPLAGUE 4\).*Spell\(PESTILENCE\)" "Spell\(HEARTSTRIKE\)" 103 103
 Assert-Order "Blood DK Heart Strike before Death Strike" "defaut/Chevalier.lua" "Spell\(HEARTSTRIKE\)" "Spell\(DEATHSTRIKE\)" 83 83
-Assert-Order "Unholy DK DnD optional before Scourge Strike" "defaut/Chevalier.lua" "CheckBoxOn\(dnd\).*Spell\(DEATHANDECAY" "Spell\(SCOURGESTRIKE\)"
+Assert-Order "Unholy DK Scourge Strike before optional DnD" "defaut/Chevalier.lua" "Spell\(SCOURGESTRIKE\)" "CheckBoxOn\(dnd\).*Spell\(DEATHANDECAY"
 Assert-Order "Demo Warlock dots before Decimation Soul Fire" "defaut/Demoniste.lua" "Spell\(CORRUPTION" "DECIMATION.*Spell\(SOULFIRE" 86 0
 Assert-Order "Destro Warlock Immolate before Conflagrate" "defaut/Demoniste.lua" "Spell\(IMMOLATE" "Spell\(CONFLAGRATE" 96 0
 Assert-Order "Feral Rake before Rip" "defaut/Druide.lua" "Spell\(RAKE" "Spell\(RIP priority=4\)"
-Assert-Order "Balance Moonfire optional" "defaut/Druide.lua" "AddCheckBox\(moonfire" "CheckBoxOn\(moonfire\).*Spell\(MOONFIRE"
+Assert-Order "Balance Moonfire enabled by default" "defaut/Druide.lua" "AddCheckBox\(moonfire SpellName\(MOONFIRE\) checked\)" "CheckBoxOn\(moonfire\).*Spell\(MOONFIRE"
 Assert-Order "Balance Eclipse Starfire buff casts Starfire" "defaut/Druide.lua" "BuffPresent\(ECLIPSESTARFIRE\).*Spell\(STARFIRE\)" "BuffPresent\(ECLIPSEWRATH\).*Spell\(WRATH\)"
 Assert-Order "Balance Wrath default filler before generic Starfire" "defaut/Druide.lua" "CheckBoxOn\(wrathfiller\).*Spell\(WRATH\)" "^\s*if SpellKnown\(STARFIRE\) Spell\(STARFIRE\)$" 0 90
 Assert-Order "Elemental Flame Shock before Lava Burst" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(LAVABURST" 73 0

@@ -92,10 +92,10 @@ AddIcon help=main
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
 		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) and { TargetDebuffExpires(BLOODPLAGUE 4) or TargetDebuffExpires(FROSTFEVER 4) } Spell(PESTILENCE)
-		if CheckBoxOn(dnd) and SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
 		if SpellKnown(SCOURGESTRIKE) Spell(SCOURGESTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)
 		if SpellKnown(BLOODBOIL) Spell(BLOODBOIL usable=1)
+		if CheckBoxOn(dnd) and SpellKnown(DEATHANDECAY) Spell(DEATHANDECAY usable=1)
 		if PetPresent() and SpellKnown(GHOULFRENZY) Spell(GHOULFRENZY usable=1 priority=2)
 		if SpellKnown(DEATHCOIL) and Mana(more 39) Spell(DEATHCOIL usable=1)
 	}
@@ -104,6 +104,7 @@ AddIcon help=main
 	{
 		if SpellKnown(ICYTOUCH) and TargetDebuffExpires(FROSTFEVER 2) Spell(ICYTOUCH)
 		if SpellKnown(PLAGUESTRIKE) and TargetDebuffExpires(BLOODPLAGUE 2) Spell(PLAGUESTRIKE)
+		if CheckBoxOn(rolldes) and Glyph(GLYPHDISEASE) and TargetDebuffPresent(BLOODPLAGUE) and TargetDebuffPresent(FROSTFEVER) and { TargetDebuffExpires(BLOODPLAGUE 4) or TargetDebuffExpires(FROSTFEVER 4) } Spell(PESTILENCE)
 		if SpellKnown(HEARTSTRIKE) Spell(HEARTSTRIKE)
 		if SpellKnown(DEATHSTRIKE) Spell(DEATHSTRIKE)
 		if SpellKnown(BLOODSTRIKE) Spell(BLOODSTRIKE)

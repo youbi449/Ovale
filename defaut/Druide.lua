@@ -36,7 +36,7 @@ Define(GLYPHOFRIP 54818)
 
 AddCheckBox(demo SpellName(DEMOROAR))
 AddCheckBox(shred SpellName(SHRED) checked)
-AddCheckBox(moonfire SpellName(MOONFIRE))
+AddCheckBox(moonfire SpellName(MOONFIRE) checked)
 AddCheckBox(wrathfiller SpellName(WRATH) checked)
 AddCheckBox(aoe L(AOE))
 
