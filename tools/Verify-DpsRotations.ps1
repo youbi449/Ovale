@@ -208,6 +208,8 @@ Assert-Order "Balance Moonfire enabled by default" "defaut/Druide.lua" "AddCheck
 Assert-Order "Balance Eclipse Starfire buff casts Starfire" "defaut/Druide.lua" "BuffPresent\(ECLIPSESTARFIRE\).*Spell\(STARFIRE\)" "BuffPresent\(ECLIPSEWRATH\).*Spell\(WRATH\)"
 Assert-Order "Balance Wrath default filler before generic Starfire" "defaut/Druide.lua" "CheckBoxOn\(wrathfiller\).*Spell\(WRATH\)" "^\s*if SpellKnown\(STARFIRE\) Spell\(STARFIRE\)$" 0 90
 Assert-Order "Elemental Flame Shock before Lava Burst" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(LAVABURST" 73 0
+Assert-Order "Enhancement Flame Shock before Stormstrike" "defaut/Chaman.lua" "Spell\(FLAMESHOCK" "Spell\(STORMSTRIKE\)" 45 45
+Assert-Order "Enhancement Lava Lash before Maelstrom dump" "defaut/Chaman.lua" "Spell\(LAVALASH\)" "MAELSTROMWEAPON stacks=5" 45 45
 Assert-Order "Fire Mage Living Bomb before Hot Streak" "defaut/Mage.lua" "Spell\(LIVINGBOMB" "HOTSTREAK.*Spell\(PYROBLAST"
 Assert-Order "Arcane Barrage optional" "defaut/Mage.lua" "AddCheckBox\(abarr" "CheckBoxOn\(abarr\).*Spell\(ARCANEBARRAGE"
 Assert-Order "Frost Mage Cold Snap after Water Elemental" "defaut/Mage.lua" "Spell\(SUMMONWATERELEMENTAL" "Spell\(COLDSNAP\)"

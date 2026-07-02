@@ -51,11 +51,6 @@ AddIcon help=main
 		}
 
 		if SpellKnown(LIGHTNINGSHIELD) and BuffExpires(LIGHTNINGSHIELD 2) Spell(LIGHTNINGSHIELD)
-		if BuffPresent(MAELSTROMWEAPON stacks=5)
-		{
-			if CheckBoxOn(chain) and SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
-			if SpellKnown(LIGHTNINGBOLT) Spell(LIGHTNINGBOLT)
-		}
 		if SpellKnown(FLAMESHOCK) and TargetDebuffExpires(FLAMESHOCK 2 haste=spell mine=1) Spell(FLAMESHOCK)
 		if SpellKnown(STORMSTRIKE) Spell(STORMSTRIKE)
 		if SpellKnown(MAGMATOTEM) and TotemExpires(fire) Spell(MAGMATOTEM)
@@ -65,6 +60,11 @@ AddIcon help=main
 			unless TotemExpires(fire) Spell(FIRENOVA)
 		}
 		if SpellKnown(LAVALASH) Spell(LAVALASH)
+		if BuffPresent(MAELSTROMWEAPON stacks=5)
+		{
+			if CheckBoxOn(chain) and SpellKnown(CHAINLIGHTNING) Spell(CHAINLIGHTNING)
+			if SpellKnown(LIGHTNINGBOLT) Spell(LIGHTNINGBOLT)
+		}
 		if SpellKnown(SEARINGTOTEM) and TotemExpires(fire) Spell(SEARINGTOTEM priority=2)
 	}
 
