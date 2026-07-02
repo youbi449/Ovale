@@ -258,6 +258,23 @@ $warriorLines = Get-Content -LiteralPath "defaut/Guerrier.lua"
 $aoeStart = ($warriorLines | Select-String -Pattern "AddIcon help=aoe" | Select-Object -First 1).LineNumber
 $offgcdStart = ($warriorLines | Select-String -Pattern "AddIcon help=offgcd" | Select-Object -First 1).LineNumber
 $warriorAoeLines = $warriorLines[($aoeStart - 1)..($offgcdStart - 2)]
+$berserkerStart = ($warriorAoeLines | Select-String -Pattern "Stance\(3\).*Berserker" | Select-Object -First 1).LineNumber
+$battleStart = ($warriorAoeLines | Select-String -Pattern "Stance\(1\).*Battle" | Select-Object -First 1).LineNumber
+if (-not $berserkerStart -or -not $battleStart) {
+    throw "Warrior AoE stance blocks are missing"
+}
+$warriorBerserkerAoeLines = $warriorAoeLines[($berserkerStart - 1)..($battleStart - 2)]
+if (($warriorBerserkerAoeLines -join "`n") -match "Spell\(THUNDERCLAP\)") {
+    throw "Warrior Fury AoE must not propose Thunder Clap in Berserker Stance"
+}
+foreach ($spell in @("SWEEPINGSTRIKES", "BLOODTHIRST", "SLAM")) {
+    if (($warriorBerserkerAoeLines -join "`n") -match "Spell\($spell") {
+        throw "Warrior Fury AoE must not propose $spell in Berserker Stance"
+    }
+}
+if (($warriorBerserkerAoeLines -join "`n") -notmatch "Spell\(CLEAVE\)") {
+    throw "Warrior Fury AoE should propose Cleave in Berserker Stance"
+}
 $singleTargetAoeSpells = @("BLOODTHIRST", "SLAM", "OVERPOWER", "MORTALSTRIKE")
 for ($i = 0; $i -lt $warriorAoeLines.Count; $i++) {
     foreach ($spell in $singleTargetAoeSpells) {

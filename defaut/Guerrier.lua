@@ -156,10 +156,7 @@ AddIcon help=aoe
 	if Stance(3) # Berserker
 	{
 		if CheckBoxOn(whirlwind) and SpellKnown(WHIRLWIND) Spell(WHIRLWIND)
-		if SpellKnown(THUNDERCLAP) Spell(THUNDERCLAP)
-		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(BLOODTHIRST) Spell(BLOODTHIRST)
 		if SpellKnown(CLEAVE) and Mana(more 65) Spell(CLEAVE)
-		if BuffPresent(SWEEPINGSTRIKES) and SpellKnown(SLAM) and TalentPoints(SLAMTALENT more 1) Spell(SLAM priority=2)
 	}
 	if Stance(1) # Battle
 	{
