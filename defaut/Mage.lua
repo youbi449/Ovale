@@ -95,6 +95,19 @@ AddIcon help=main
 
 AddIcon help=aoe
 {
+	if SpellKnown(ARCANEBARRAGE) or TalentPoints(TALENTARCANEBARRAGE more 0)
+	{
+		if SpellKnown(BLIZZARD) Spell(BLIZZARD)
+		if SpellKnown(FLAMESTRIKE) Spell(FLAMESTRIKE)
+		if SpellKnown(ARCANEEXPLOSION) Spell(ARCANEEXPLOSION)
+		if SpellKnown(CONEOFCOLD) Spell(CONEOFCOLD)
+	}
+	if SpellKnown(DEEPFREEZE) or TalentPoints(TALENTCHILLEDTOTHEBONES more 0)
+	{
+		if SpellKnown(BLIZZARD) Spell(BLIZZARD)
+		if SpellKnown(CONEOFCOLD) Spell(CONEOFCOLD)
+		if SpellKnown(FROSTBOLT) Spell(FROSTBOLT priority=2)
+	}
 	if SpellKnown(LIVINGBOMB) and TargetDebuffExpires(LIVINGBOMB 0 mine=1) and TargetDeadIn(more 12) Spell(LIVINGBOMB)
 	if SpellKnown(FLAMESTRIKE) Spell(FLAMESTRIKE)
 	if SpellKnown(BLASTWAVE) Spell(BLASTWAVE)

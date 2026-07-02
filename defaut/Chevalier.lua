@@ -133,6 +133,7 @@ AddIcon help=aoe
 	}
 	if SpellKnown(HOWLINGBLAST) or SpellKnown(FROSTSTRIKE)
 	{
+		if BuffPresent(KILLINGMACHINE) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
 		if BuffPresent(FREEZINGFOG) and SpellKnown(HOWLINGBLAST) Spell(HOWLINGBLAST)
 		if BuffPresent(KILLINGMACHINE) and SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)
 		if SpellKnown(FROSTSTRIKE) Spell(FROSTSTRIKE usable=1)

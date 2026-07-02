@@ -198,6 +198,7 @@ Assert-Order "Hunter MM Silencing Shot before Steady Shot" "defaut/Chasseur.lua"
 Assert-Order "Frost DK Rime before Obliterate" "defaut/Chevalier.lua" "FREEZINGFOG.*Spell\(HOWLINGBLAST" "Spell\(OBLITERATE\)"
 Assert-Order "Frost DK Killing Machine before Obliterate" "defaut/Chevalier.lua" "KILLINGMACHINE.*Spell\(FROSTSTRIKE" "Spell\(OBLITERATE\)"
 Assert-Order "Frost DK disease roll before Obliterate" "defaut/Chevalier.lua" "TargetDebuffExpires\(BLOODPLAGUE 4\).*Spell\(PESTILENCE\)" "Spell\(OBLITERATE\)"
+Assert-Order "Frost DK AoE Killing Machine Howling Blast before Frost Strike" "defaut/Chevalier.lua" "KILLINGMACHINE.*Spell\(HOWLINGBLAST" "KILLINGMACHINE.*Spell\(FROSTSTRIKE" 135 135
 Assert-Order "Blood DK disease roll before Heart Strike" "defaut/Chevalier.lua" "TargetDebuffExpires\(BLOODPLAGUE 4\).*Spell\(PESTILENCE\)" "Spell\(HEARTSTRIKE\)" 103 103
 Assert-Order "Blood DK Heart Strike before Death Strike" "defaut/Chevalier.lua" "Spell\(HEARTSTRIKE\)" "Spell\(DEATHSTRIKE\)" 83 83
 Assert-Order "Unholy DK Scourge Strike before optional DnD" "defaut/Chevalier.lua" "Spell\(SCOURGESTRIKE\)" "CheckBoxOn\(dnd\).*Spell\(DEATHANDECAY"
@@ -221,6 +222,8 @@ Assert-Order "Fire Mage Living Bomb before Hot Streak" "defaut/Mage.lua" "Spell\
 Assert-Order "Arcane Barrage optional" "defaut/Mage.lua" "AddCheckBox\(abarr" "CheckBoxOn\(abarr\).*Spell\(ARCANEBARRAGE"
 Assert-Order "Frost Mage Cold Snap after Water Elemental" "defaut/Mage.lua" "Spell\(SUMMONWATERELEMENTAL" "Spell\(COLDSNAP\)"
 Assert-Order "Mage Evocation gated by low mana" "defaut/Mage.lua" "ManaPercent\(less 25\)" "Spell\(EVOCATION\)"
+Assert-Order "Arcane Mage AoE Blizzard before Flamestrike" "defaut/Mage.lua" "Spell\(BLIZZARD\)" "Spell\(FLAMESTRIKE\)" 93 93
+Assert-Order "Frost Mage AoE Blizzard before Cone of Cold" "defaut/Mage.lua" "Spell\(BLIZZARD\)" "Spell\(CONEOFCOLD\)" 99 99
 Assert-Order "Shadow SWP after Shadow Weaving before SWD" "defaut/Pretre.lua" "SHADOWWEAVING.*Spell\(SWP" "Spell\(SWD priority=2\)"
 Assert-Order "Shadow Vampiric Embrace kept before dots" "defaut/Pretre.lua" "Spell\(VE\)" "Spell\(VT\)" 43 43
 Assert-Order "Shadow AoE long-lived dots before Mind Sear" "defaut/Pretre.lua" "Spell\(VT\)" "Spell\(MINDSEAR\)" 62 62
@@ -290,7 +293,7 @@ for ($i = 0; $i -lt $warriorAoeLines.Count; $i++) {
 $aoeForbiddenSpells = @(
     @{ File = "defaut/Druide.lua"; Help = "aoe"; Spells = @("MANGLECAT", "RAKE", "CLAW", "INSECTSWARM", "MOONFIRE", "STARFIRE", "WRATH") },
     @{ File = "defaut/Chasseur.lua"; Help = "aoe"; Spells = @("EXPLOSIVESHOT", "STEADYSHOT") },
-    @{ File = "defaut/Mage.lua"; Help = "aoe"; Spells = @("ARCANEBLAST", "FROSTBOLT", "FIREBALL") },
+    @{ File = "defaut/Mage.lua"; Help = "aoe"; Spells = @("ARCANEBLAST", "FIREBALL") },
     @{ File = "defaut/Pretre.lua"; Help = "aoe"; Spells = @("MF", "HOLYFIRE", "SMITE") },
     @{ File = "defaut/Voleur.lua"; Help = "aoe"; Spells = @("MUTILATE", "SINISTERSTRIKE", "HEMORRHAGE") },
     @{ File = "defaut/Demoniste.lua"; Help = "aoe"; Spells = @("INCINERATE", "SHADOWBOLT") },
